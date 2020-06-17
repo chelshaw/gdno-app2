@@ -7,6 +7,7 @@ React-Native app created with Expo.
 1. Pull down the repo
 
 2. `yarn install` inside the root directory
+    Note: Make sure your node version is set to 10.15.3
 
 3. `cd ios; pod install` to install the ios podfiles
 

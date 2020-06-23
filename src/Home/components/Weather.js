@@ -13,6 +13,10 @@ import { loadWeatherDataFromCoords, getCoordsForZip } from '../data';
 const styles = StyleSheet.create({
   weather: {
     paddingVertical: space[2],
+    paddingLeft: space[2],
+  },
+  relatableWeather: {
+    margin: space[2]
   },
   loadingWrapper: {
     padding: space[4],
@@ -61,7 +65,7 @@ const Weather = ({
   if (loading || loadingZipcode) {
     return (
       <View style={styles.loadingWrapper}>
-        <ActivityIndicator />
+        <ActivityIndicator size="large" />
       </View>
     );
   }
@@ -81,7 +85,7 @@ const Weather = ({
           <WeatherBlock key={day.time} {...day} />
         ))}
       </ScrollView>
-      <RelatableWeather dailyData={weatherDays || []} />
+      <RelatableWeather style={styles.relatableWeather} dailyData={weatherDays || []} />
     </>
   );
 };

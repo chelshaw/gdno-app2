@@ -1,7 +1,7 @@
 import * as firebase from 'firebase';
 import 'firebase/firestore';
 
-import { setValue, getValue } from '../shared/data/localStorage';
+import { retrieveUser, updateUser } from '../shared/data/localStorage';
 import handleError from '../shared/data/handleError';
 
 const settingsKeys = [
@@ -32,7 +32,7 @@ function getValidKeypairs(object, keyList) {
 export const getStoredUser = async () => {
   let result;
   try {
-    result = await getValue('S_uid');
+    result = await retrieveUser();
   } catch (e) {
     handleError(e);
     throw e;
@@ -41,18 +41,16 @@ export const getStoredUser = async () => {
 };
 
 export const getStoredInfo = async () => {
-  let uid;
-  let zipcode;
+  let userInfo;
   try {
-    uid = await getValue('S_uid');
-    zipcode = await getValue('S_zipcode');
+    userInfo = await retrieveUser();
   } catch (e) {
     handleError(e);
     throw new Error('There was a problem fetching stored data');
   }
   return {
-    uid,
-    zipcode,
+    uid: (userInfo || {}).uid,
+    zipcode: (userInfo || {}).zipcode,
   };
 };
 
@@ -63,7 +61,7 @@ export const getSettings = async authUser => firebase
   .get();
 
 const storeZipcode = (zipcode) => {
-  setValue('S_zipcode', zipcode);
+  updateUser({ zipcode });
 };
 
 export const addUserSettings = async (uid, settings) => {
@@ -74,4 +72,4 @@ export const addUserSettings = async (uid, settings) => {
   return firebase.firestore().collection('users').doc(uid).set(userSettings, { merge: true });
 };
 
-export const storeUser = user => setValue('S_uid', user.uid);
+export const storeUser = user => updateUser({ uid: user.uid });

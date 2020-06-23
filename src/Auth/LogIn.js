@@ -76,7 +76,7 @@ const LogIn = ({ navigation }) => {
     return (
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.centered}>
-          <ActivityIndicator />
+          <ActivityIndicator size="large" />
         </View>
       </SafeAreaView>
     );

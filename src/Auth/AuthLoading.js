@@ -3,26 +3,47 @@ import React, { useEffect } from 'react';
 import { PageLoader } from '../shared/components';
 import { PROPSHAPES } from '../shared/constants';
 import handleError from '../shared/data/handleError';
+import { retrieveVersion, clearStorage } from '../shared/data/localStorage';
 import { getStoredInfo } from './data';
 import { useAuth } from '../shared/use-auth';
+
+const currentVersion = '0.4.0';
 
 const AuthLoading = ({ navigation }) => {
   const auth = useAuth();
 
+  const checkVersionSignout = () => {
+    retrieveVersion().then((version) => {
+      if (!version || version !== currentVersion) {
+        clearStorage();
+      }
+      auth.signout();
+    }).catch((error) => {
+      handleError(error);
+    }).finally(() => {
+      navigation.navigate('Auth');
+    });
+  };
+
   const checkLoginState = () => {
     getStoredInfo()
-      .then(({ uid, zipcode }) => {
-        navigation.navigate(uid && zipcode ? 'App' : 'Auth');
-        // TODO: wait for login
+      .then((u) => {
+        if (u.uid && u.zipcode) {
+          navigation.navigate('App');
+          return;
+        }
+        checkVersionSignout();
       })
       .catch((e) => {
         handleError(e);
-        navigation.navigate('Auth');
+        checkVersionSignout();
       });
   };
 
   useEffect(() => {
-    checkLoginState();
+    const timer = setTimeout(checkLoginState, 5000);
+
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {

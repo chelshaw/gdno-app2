@@ -1,16 +1,20 @@
-import React from 'react';
+import React, {
+  useCallback, useState, useMemo, useEffect
+} from 'react';
 import {
-  View,
+  Alert,
   ScrollView,
   ActivityIndicator,
   StyleSheet,
   SafeAreaView,
 } from 'react-native';
 
-import { loadStoredPlantByName } from './data';
+import { getPlantInfoById, updatePlantInfoById, deletePlantById } from './data';
 import {
-  COLORS, PROPSHAPES, detailsScreens, centered, safeArea
+  COLORS, PROPSHAPES, detailsScreens, safeArea
 } from '../shared/constants';
+import handleError from '../shared/data/handleError';
+import { useAuth } from '../shared/use-auth';
 
 /* COMPONENTS */
 import TitleBar from './components/TitleBar';
@@ -19,6 +23,7 @@ import CareGuideEssentials from './sections/Essentials';
 import CareGuideGrow from './sections/Grow';
 import CareGuideIssues from './sections/Issues';
 import CareGuideEnjoy from './sections/Enjoy';
+import { PageLoader } from '../shared/components';
 
 const styles = StyleSheet.create({
   container: {
@@ -30,51 +35,100 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     height: 50,
   },
-  centered,
   safeArea,
 });
 
-class CareGuide extends React.Component {
-  static navigationOptions = {
-    header: null,
+const CareGuide = ({
+  navigation
+}) => {
+  const [info, setInfo] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [activeScreen, setScreen] = useState(detailsScreens.essentials);
+  const auth = useAuth();
+
+  const getCurrentPlantInfo = () => {
+    const { id } = navigation.state.params;
+    if (!id) navigation.goBack();
+    setLoading(true);
+    getPlantInfoById(id)
+      .then((result) => {
+        setInfo(result);
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
+        navigation.goBack();
+      });
   };
 
-  state = {
-    info: {},
-    loading: false,
-    screen: detailsScreens.essentials,
-  }
+  useEffect(() => {
+    getCurrentPlantInfo();
 
-  componentDidMount() {
-    this.getPlantInfo(this.props.navigation.state.params.name);
-  }
+    return () => setLoading(false);
+  }, []);
 
-  getPlantInfo = (plant) => {
-    this.setState({ loading: true });
-    loadStoredPlantByName(plant)
-      .then((result) => {
-        this.setState({
-          info: result,
-          loading: false,
+  const triggerErrorMessage = (message = 'Something went wrong. Please try again later.') => (
+    Alert.alert(
+      'Well, darn.',
+      message,
+      [
+        { text: 'OK', onPress: () => {} },
+      ]
+    )
+  );
+
+  const handleDeletePlant = useCallback(() => {
+    const { uid } = auth.user;
+    const { id } = navigation.state.params;
+    if (!id || !uid) {
+      handleError(`Plant or User ID missing on delete: ${uid} ${id}`);
+      triggerErrorMessage();
+      return;
+    }
+    setLoading(true);
+    deletePlantById(uid, id)
+      .then(() => {
+        navigation.navigate('Home', {
+          refresh: true,
         });
       })
       .catch(() => {
-        this.setState({ loading: false });
+        triggerErrorMessage();
       });
-  }
+  }, [navigation, auth]);
 
-  goToDetail = (screen) => {
-    this.setState({ screen });
-  }
+  const handleUpdatePlant = useCallback((updates) => {
+    const { uid } = auth.user;
+    const { id } = navigation.state.params;
+    if (!id || !uid) {
+      handleError(`Plant or User ID missing on update: ${uid} ${id}`);
+      triggerErrorMessage();
+      return;
+    }
+    updatePlantInfoById(uid, id, updates)
+      .then(() => {
+        setInfo({
+          ...info,
+          ...updates,
+        });
+      })
+      .catch((e) => {
+        handleError(e);
+        triggerErrorMessage();
+      });
+  }, [auth, navigation, info]);
 
-  renderScreenContent = (screen) => {
-    const { info } = this.state;
-    if (!info) return (<ActivityIndicator />);
+  const goToDetail = (toScreen) => {
+    setScreen(toScreen);
+  };
 
-    switch (screen) {
+  const screenContent = useMemo(() => {
+    if (!info) return (<ActivityIndicator size="large" color={COLORS.grass} />);
+
+    switch (activeScreen) {
       case detailsScreens.grow:
         return (
-          <CareGuideGrow info={this.state.info} />
+          <CareGuideGrow info={info} />
         );
       case detailsScreens.issues:
         return (
@@ -82,46 +136,38 @@ class CareGuide extends React.Component {
         );
       case detailsScreens.enjoy:
         return (
-          <CareGuideEnjoy info={this.state.info} />
+          <CareGuideEnjoy info={info} />
         );
       default:
-        return <CareGuideEssentials info={this.state.info} />;
+        return <CareGuideEssentials info={info} />;
     }
-  }
+  }, [activeScreen, info]);
 
-  renderSubnav = () => (
-    <SubNavMenu onPress={this.goToDetail} active={this.state.screen} />
-  )
-
-  render() {
-    const { name } = this.props.navigation.state.params;
-    const { info, screen, loading } = this.state;
-    const subnav = this.renderSubnav();
-    const screenContent = this.renderScreenContent(screen);
-
-    if (loading) {
-      return (
-        <View style={styles.centered}>
-          <ActivityIndicator size="large" color={COLORS.grass} />
-        </View>
-      );
-    }
-
+  if (loading || !info) {
     return (
-      <SafeAreaView style={styles.safeArea}>
-        <ScrollView style={styles.container}>
-          <TitleBar
-            onClickBack={() => this.props.navigation.goBack()}
-            title={name}
-            imageUrl={info.images ? info.images[0].thumbnails.large.url : ''}
-          />
-          {subnav}
-          {screenContent}
-        </ScrollView>
-      </SafeAreaView>
+      <PageLoader size="large" color="grass" />
     );
   }
-}
+
+  return (
+    <SafeAreaView style={styles.safeArea}>
+      <ScrollView style={styles.container}>
+        <TitleBar
+          onClickBack={() => navigation.navigate('Home', {
+            refresh: true,
+          })}
+          nickname={info.nickname}
+          species={info.name}
+          imageUrl={info.thumbnail}
+          updatePlant={updates => handleUpdatePlant(updates)}
+          deletePlant={handleDeletePlant}
+        />
+        <SubNavMenu onPress={goToDetail} active={activeScreen} />
+        {screenContent}
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
 
 CareGuide.propTypes = {
   navigation: PROPSHAPES.navigation,

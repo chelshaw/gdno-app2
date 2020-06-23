@@ -9,8 +9,6 @@ import {
   Media, FormInput, Button, Touchable, ButtonText,
 } from '../shared/components';
 import logo from '../shared/assets/icon-transparent.png';
-import bg from '../shared/assets/splash.png';
-
 
 import {
   centered, space, safeArea, hitSlop
@@ -21,18 +19,6 @@ const styles = StyleSheet.create({
   LogInWrapper: {
     flex: 1,
     backgroundColor: '#fff',
-  },
-  bgWrapper: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-  },
-  bgImage: {
-    flex: 1,
-    resizeMode: 'cover',
-    opacity: 0.1,
   },
   logInButton: {
     paddingVertical: space[1],
@@ -64,14 +50,6 @@ const Welcome = () => (
   <View
     style={styles.LogInWrapper}
   >
-    <View
-      style={styles.bgWrapper}
-    >
-      <Image
-        style={styles.bgImage}
-        source={bg}
-      />
-    </View>
     <SafeAreaView
       style={styles.safeArea}
     >

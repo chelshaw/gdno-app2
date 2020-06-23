@@ -4,7 +4,7 @@ import 'firebase/firestore';
 import handleError from '../shared/data/handleError';
 import { performGet } from '../shared/data/rest';
 import {
-  getValue, keyTypes, getStoredDataOfType
+  retrieveUser, retrieveParsedDataOfType
 } from '../shared/data/localStorage';
 import { DARKSKY_KEY } from '../shared/secrets';
 
@@ -12,15 +12,46 @@ export { default as getCoordsForZip } from './travisZipcodes';
 
 export const loadStoredPlants = async () => {
   try {
-    const plants = await getStoredDataOfType(keyTypes.plants);
-    return plants.map(v => JSON.parse(v[1]));
+    const plants = await retrieveParsedDataOfType('plant');
+    return plants;
   } catch (e) {
     handleError(e);
     throw e;
   }
 };
 
-export const getSavedZipcode = () => getValue('S_zipcode');
+export const fetchUserPlants = userId => firebase
+  .firestore()
+  .collection('users')
+  .doc(userId)
+  .collection('myPlants')
+  .get()
+  .then((querySnapshot) => {
+    const plantList = [];
+    querySnapshot.forEach((doc) => {
+      const fields = doc.data();
+      plantList.push({
+        id: doc.id,
+        ...fields,
+      });
+    });
+    return plantList;
+  })
+  .catch((e) => {
+    handleError(e);
+    throw e;
+  });
+
+export const getSavedZipcode = async () => {
+  let info = {};
+  try {
+    info = await retrieveUser('user');
+    return info.zipcode;
+  } catch (e) {
+    handleError(e);
+    throw e;
+  }
+};
 
 export const loadWeatherDataFromCoords = async (lat, lng) => {
   let weatherData;
@@ -35,9 +66,6 @@ export const loadWeatherDataFromCoords = async (lat, lng) => {
   return weatherData;
 };
 
-export const getZipcodeForUserId = userId => firebase.firestore().collection('users').doc(`${userId}`).get();
-
 export default {
   loadStoredPlants,
-  getZipcodeForUserId,
 };

@@ -1,22 +1,24 @@
 {
   "scripts": {
     "android": "react-native run-android",
+    "android-prod": "react-native run-android --variant release",
     "ios": "react-native run-ios",
-    "web": "expo start --web",
+    "ios-prod": "react-native run-ios --configuration Release",
     "start": "react-native start",
     "test": "jest",
+    "build-ios": "expo build:ios",
     "build-android": "expo build:android -t app-bundle",
     "ios-mini": "react-native run-ios --configuration Release",
     "android-mini": "react-native run-android --version release",
-    "devices": "xcrun simctl list devices",
-    "start-release": "expo start --no-dev --minify",
-    "clean": "rm -r node_modules; rm -r ios/Pods"
+    "ios-devices": "xcrun simctl list devices",
+    "android-devices": "adb devices",
+    "clean": "rm -rf node_modules; rm -rf ios/Pods"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.7.1",
     "@sentry/react-native": "^1.1.0",
     "axios": "^0.19.0",
     "expo": "^34.0.1",
-    "expo-web-browser": "^6.0.0",
     "firebase": "^6.4.2",
     "formik": "^1.5.8",
     "lodash": "^4.17.15",

@@ -43,7 +43,15 @@ There are two ways to do this. One, is to have a device, put it in debug mode (c
 
 ## Contributing
 
-We use [gitflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) (for now). See docs for details. Install with `brew install git-flow` and open a PR with your feature branch.
+1. Checkout a new branch from `main`. Use `feat/` prefix for feature work, `bugfix/` for bugfixes, `docs/` for documentation and `chore/` for other tasks (eg. Dependency bumping)
+
+2. Test your branch using the `release` configuration for both android and ios before submitting a PR
+
+3. Submit a pull request with your changes. Please be descriptive and give context in the summary text of the PR (screenshots encouraged!)
+
+4. Post to #engineering slack channel with a request for review and a link to your PR
+
+5. You may merge to the main branch once you have at least 1 approval
 
 ## Resources
 

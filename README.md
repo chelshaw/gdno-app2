@@ -2,6 +2,20 @@
 
 React-Native app created with Expo (bare workflow).
 
+## List of necessary software and frameworks to have installed
+
+Please make sure that you have these softwares installed locally for your respective OS.
+-`node`
+-`watchman`
+-`nvm`
+-`react-native-cli`
+MacOS:
+-Xcode/Xcode CLI Tools
+-`cocoapods`
+Windows:
+-Android Studio
+-expo-cli
+
 # Getting Started
 
 1. Pull down the repo

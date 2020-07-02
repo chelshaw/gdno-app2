@@ -2,9 +2,10 @@ import React from 'react';
 import {
   View,
   StyleSheet,
-  Platform,
+  Linking,
+  Clipboard,
+  Alert,
 } from 'react-native';
-import * as WebBrowser from 'expo-web-browser';
 import {
   Body,
   Header,
@@ -17,8 +18,22 @@ const ss = StyleSheet.create({
   ...styles
 });
 
+const handleHelpError = () => {
+  Alert.alert(
+    'It\'s not you, it\'s us.',
+    `That link didn't work how we thought it would. Just shoot us an email at ${LINKS.helpEmail} and we'll help ya out.`,
+    [
+      { text: 'Copy email', onPress: () => Clipboard.setString(LINKS.helpEmail) },
+    ],
+  );
+};
+
 const handleHelpPress = () => {
-  WebBrowser.openBrowserAsync(LINKS.help);
+  Linking
+    .openURL(LINKS.help)
+    .catch(() => {
+      handleHelpError();
+    });
 };
 
 const CareGuideIssues = () => (
@@ -32,11 +47,7 @@ const CareGuideIssues = () => (
     </View>
 
     <View style={ss.section}>
-      {Platform.OS === 'android'
-        // TODO: better experience for IOS
-        ? <Button onPress={handleHelpPress}>Help me</Button>
-        : <Body weight="bold">help@growgardenio.zendesk.com</Body>
-      }
+      <Button onPress={handleHelpPress}>Help me</Button>
     </View>
   </View>
 );

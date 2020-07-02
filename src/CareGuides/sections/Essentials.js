@@ -55,7 +55,7 @@ class Essentials extends Component {
       isFeatureDetailsModalOpen: true,
       featureDetails: {
         title: text,
-        category: `${info.Herb} • ${category}`,
+        category: `${info.name} • ${category}`,
         content: modalContent || 'More coming soon'
       }
     });
@@ -102,7 +102,7 @@ class Essentials extends Component {
       isFeatureDetailsModalOpen,
       featureDetails,
     } = this.state;
-    if (!info) return <ActivityIndicator />;
+    if (!info) return <ActivityIndicator size="large" />;
 
     return (
       <View style={ss.main}>

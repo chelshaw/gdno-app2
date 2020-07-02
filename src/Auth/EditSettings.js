@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  SafeAreaView, View, StyleSheet, Linking
+  SafeAreaView, View, StyleSheet, Linking, Clipboard, Alert
 } from 'react-native';
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -53,11 +53,22 @@ const SettingsScreen = ({ navigation }) => {
   const auth = useAuth();
   const initialSettings = { ...navigation.state.params };
 
+  const handleHelpError = () => {
+    Alert.alert(
+      'It\'s not you, it\'s us.',
+      `That link didn't work how we thought it would. Just shoot us an email at ${LINKS.helpEmail} and we'll help ya out.`,
+      [
+        { text: 'Copy email', onPress: () => Clipboard.setString(LINKS.helpEmail) },
+      ]
+    );
+  };
+
   const handleEmailPress = () => {
     Linking
       .openURL(LINKS.help)
       .catch((e) => {
         handleError(e);
+        handleHelpError();
       });
   };
 

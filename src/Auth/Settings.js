@@ -1,3 +1,4 @@
+/* global __DEV__ */
 import React, { useEffect, useState } from 'react';
 import {
   SafeAreaView, StyleSheet, ActivityIndicator
@@ -7,10 +8,10 @@ import {
   space, safeArea, PROPSHAPES, centered
 } from '../shared/constants';
 import {
-  Button, ErrorState, Media, SubHead,
+  Button, ErrorState, Media, SubHead
 } from '../shared/components';
 import { defaultSettings, getSettings } from './data';
-import { removeKeys } from '../shared/data/localStorage';
+import { clearUserStorage, getAllKeysOfType, clearPlantStorage } from '../shared/data/localStorage';
 import handleError from '../shared/data/handleError';
 import { useAuth } from '../shared/use-auth';
 
@@ -27,6 +28,7 @@ const SettingsScreen = ({ navigation }) => {
   const [error, setError] = useState('');
   const [settings, setSettings] = useState(defaultSettings);
   const [requireLogin, setRequireLogin] = useState(false);
+  const [keys, setKeys] = useState(null);
   const reset = navigation.getParam('reset');
   const auth = useAuth();
 
@@ -52,6 +54,16 @@ const SettingsScreen = ({ navigation }) => {
       });
   };
 
+  const loadAllKeys = () => {
+    getAllKeysOfType('all')
+      .then(results => setKeys(results))
+      .catch(() => {});
+  };
+
+  useEffect(() => {
+    loadAllKeys();
+  }, []);
+
   useEffect(() => {
     const timeout = setTimeout(() => {
       if (loading) {
@@ -73,10 +85,14 @@ const SettingsScreen = ({ navigation }) => {
     [auth, loading, reset],
   );
 
+  const clearPlants = () => {
+    clearPlantStorage();
+  };
+
   const handleSignOut = () => {
     auth.signout()
       .then(() => {
-        removeKeys(['S_uid']);
+        clearUserStorage();
       })
       .finally(() => {
         navigation.navigate('Welcome');
@@ -107,7 +123,7 @@ const SettingsScreen = ({ navigation }) => {
       <SafeAreaView style={ss.safeArea}>
         <Media>
           <Media.Body style={ss.centered}>
-            <ActivityIndicator />
+            <ActivityIndicator size="large" />
           </Media.Body>
           <Media.Item>
             <Button color="danger" onPress={handleSignOut}>Log Out</Button>
@@ -135,6 +151,14 @@ const SettingsScreen = ({ navigation }) => {
             value={settings.zipcode}
           />
           <Button align="left" inverted onPress={() => navigation.navigate('EditSettings', { ...settings })}>Edit</Button>
+          {__DEV__ && (
+            <>
+              <Button onPress={clearPlants}>Clear</Button>
+              {keys && keys.length && keys.map(k => (
+                <SubHead key={k}>{k}</SubHead>
+              ))}
+            </>
+          )}
         </Media.Body>
         <Media.Item>
           <Button color="danger" onPress={handleSignOut}>Log Out</Button>

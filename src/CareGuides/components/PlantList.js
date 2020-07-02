@@ -32,6 +32,7 @@ const PlantList = ({
           selected={selectable && selectedList.indexOf(item.id) >= 0}
         />
       )}
+      keyExtractor={item => item.id}
       ListHeaderComponent={header}
       ListFooterComponent={footer}
     />

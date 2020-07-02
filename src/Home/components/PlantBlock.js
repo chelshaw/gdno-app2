@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
+import PropTypes from 'prop-types';
 import { COLORS, space } from '../../shared/constants';
 import { ThumbnailWithFallback, Type } from '../../shared/components';
 
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
 const PlantBlock = ({
   style,
   nickname,
-  name,
+  species,
   imageUrl,
   ...passedProps,
 }) => (
@@ -32,14 +33,21 @@ const PlantBlock = ({
       <ThumbnailWithFallback
         size={72}
         imageUrl={imageUrl}
-        name={nickname || name}
+        name={nickname || species}
       />
     </View>
     <Type weight="bold" color="gray" align="center" size={14} lineHeight={1}>
-      {nickname || name}
+      {nickname || species}
     </Type>
-    {!!nickname && <Type italic align="center" color="medGray" size={12}>{name}</Type>}
+    {!!nickname && <Type italic align="center" color="medGray" size={12}>{species}</Type>}
   </View>
 );
+
+PlantBlock.propTypes = {
+  style: PropTypes.object,
+  nickname: PropTypes.string,
+  species: PropTypes.string,
+  imageUrl: PropTypes.string,
+};
 
 export default PlantBlock;

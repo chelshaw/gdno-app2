@@ -35,7 +35,7 @@ const Grow = ({ info }) => {
     // TODO: handle mulch info
     return {
       title: text,
-      category: `${info.Herb} • ${feature}`,
+      category: `${info.name} • ${feature}`,
       content,
     };
   };
@@ -49,7 +49,7 @@ const Grow = ({ info }) => {
   if (!info) {
     return (
       <View style={ss.verticallyCentered}>
-        <ActivityIndicator />
+        <ActivityIndicator size="large" />
       </View>
     );
   }

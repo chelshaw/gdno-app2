@@ -7,18 +7,18 @@
 	objects = {
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* gdnoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* gdnoTests.m */; };
+		0CBA24D83C804769A1F8E1FA /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D452B8C8D9848659BA50C43 /* libz.tbd */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		5319C0A19A654668A6965D1C /* CircularAirPro-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3B232DAB57C642C3882B3498 /* CircularAirPro-Bold.otf */; };
 		620712E490176A782BF15DF9 /* libPods-gdnoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ACA61858FEBAD12077898F7 /* libPods-gdnoTests.a */; };
+		8147094212C44C22B8F64BD7 /* CircularAirPro-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5DDFD992FDB44EE5907BC16C /* CircularAirPro-Light.otf */; };
 		B31E9BFF5E5A3F9EFEDB189B /* libPods-gdno.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D58A37996249779191905DD1 /* libPods-gdno.a */; };
 		BB2E3E2D0AA541DA9B05F3F9 /* CircularAirPro-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5688369D8AF64F5ABF03FED6 /* CircularAirPro-Black.otf */; };
-		5319C0A19A654668A6965D1C /* CircularAirPro-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3B232DAB57C642C3882B3498 /* CircularAirPro-Bold.otf */; };
-		8147094212C44C22B8F64BD7 /* CircularAirPro-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5DDFD992FDB44EE5907BC16C /* CircularAirPro-Light.otf */; };
 		D80758946AA6444EB17A096C /* CircularAirPro-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7C08823F0CA54A9C9A2C781C /* CircularAirPro-LightItalic.otf */; };
 		EDCBCEF2163A4AD8982EC5FE /* CircularAirPro-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 827E6E0EE21A4411AEB0BBB0 /* CircularAirPro-Medium.otf */; };
-		0CBA24D83C804769A1F8E1FA /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D452B8C8D9848659BA50C43 /* libz.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,18 +46,18 @@
 		27ED8FAC15FD44BE43E6DBB2 /* Pods-gdno.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gdno.release.xcconfig"; path = "Target Support Files/Pods-gdno/Pods-gdno.release.xcconfig"; sourceTree = "<group>"; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ACA61858FEBAD12077898F7 /* libPods-gdnoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gdnoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B232DAB57C642C3882B3498 /* CircularAirPro-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "CircularAirPro-Bold.otf"; path = "../src/shared/fonts/CircularAirPro-Bold.otf"; sourceTree = "<group>"; };
+		5688369D8AF64F5ABF03FED6 /* CircularAirPro-Black.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "CircularAirPro-Black.otf"; path = "../src/shared/fonts/CircularAirPro-Black.otf"; sourceTree = "<group>"; };
 		59CB29AFAEF3FDEB70A955C7 /* Pods-gdnoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gdnoTests.debug.xcconfig"; path = "Target Support Files/Pods-gdnoTests/Pods-gdnoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5DDFD992FDB44EE5907BC16C /* CircularAirPro-Light.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "CircularAirPro-Light.otf"; path = "../src/shared/fonts/CircularAirPro-Light.otf"; sourceTree = "<group>"; };
+		7C08823F0CA54A9C9A2C781C /* CircularAirPro-LightItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "CircularAirPro-LightItalic.otf"; path = "../src/shared/fonts/CircularAirPro-LightItalic.otf"; sourceTree = "<group>"; };
+		827E6E0EE21A4411AEB0BBB0 /* CircularAirPro-Medium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "CircularAirPro-Medium.otf"; path = "../src/shared/fonts/CircularAirPro-Medium.otf"; sourceTree = "<group>"; };
 		917C747C528844ACA64DDD4E /* Pods-gdnoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gdnoTests.release.xcconfig"; path = "Target Support Files/Pods-gdnoTests/Pods-gdnoTests.release.xcconfig"; sourceTree = "<group>"; };
+		9D452B8C8D9848659BA50C43 /* libz.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		C47FE0C51A23029569379819 /* Pods-gdno.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gdno.debug.xcconfig"; path = "Target Support Files/Pods-gdno/Pods-gdno.debug.xcconfig"; sourceTree = "<group>"; };
 		D58A37996249779191905DD1 /* libPods-gdno.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gdno.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		5688369D8AF64F5ABF03FED6 /* CircularAirPro-Black.otf */ = {isa = PBXFileReference; name = "CircularAirPro-Black.otf"; path = "../src/shared/fonts/CircularAirPro-Black.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		3B232DAB57C642C3882B3498 /* CircularAirPro-Bold.otf */ = {isa = PBXFileReference; name = "CircularAirPro-Bold.otf"; path = "../src/shared/fonts/CircularAirPro-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		5DDFD992FDB44EE5907BC16C /* CircularAirPro-Light.otf */ = {isa = PBXFileReference; name = "CircularAirPro-Light.otf"; path = "../src/shared/fonts/CircularAirPro-Light.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		7C08823F0CA54A9C9A2C781C /* CircularAirPro-LightItalic.otf */ = {isa = PBXFileReference; name = "CircularAirPro-LightItalic.otf"; path = "../src/shared/fonts/CircularAirPro-LightItalic.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		827E6E0EE21A4411AEB0BBB0 /* CircularAirPro-Medium.otf */ = {isa = PBXFileReference; name = "CircularAirPro-Medium.otf"; path = "../src/shared/fonts/CircularAirPro-Medium.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		9D452B8C8D9848659BA50C43 /* libz.tbd */ = {isa = PBXFileReference; name = "libz.tbd"; path = "usr/lib/libz.tbd"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = sourcecode.text-based-dylib-definition; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +96,18 @@
 				00E356F11AD99517003FC87E /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0A771DAFFAF949C9B61E32E6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5688369D8AF64F5ABF03FED6 /* CircularAirPro-Black.otf */,
+				3B232DAB57C642C3882B3498 /* CircularAirPro-Bold.otf */,
+				5DDFD992FDB44EE5907BC16C /* CircularAirPro-Light.otf */,
+				7C08823F0CA54A9C9A2C781C /* CircularAirPro-LightItalic.otf */,
+				827E6E0EE21A4411AEB0BBB0 /* CircularAirPro-Medium.otf */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		13B07FAE1A68108700A75B9A /* gdno */ = {
@@ -165,24 +177,10 @@
 				59CB29AFAEF3FDEB70A955C7 /* Pods-gdnoTests.debug.xcconfig */,
 				917C747C528844ACA64DDD4E /* Pods-gdnoTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		0A771DAFFAF949C9B61E32E6 /* Resources */ = {
-			isa = "PBXGroup";
-			children = (
-				5688369D8AF64F5ABF03FED6 /* CircularAirPro-Black.otf */,
-				3B232DAB57C642C3882B3498 /* CircularAirPro-Bold.otf */,
-				5DDFD992FDB44EE5907BC16C /* CircularAirPro-Light.otf */,
-				7C08823F0CA54A9C9A2C781C /* CircularAirPro-LightItalic.otf */,
-				827E6E0EE21A4411AEB0BBB0 /* CircularAirPro-Medium.otf */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-			path = "";
-		};
-		4DB76CCEE8E34BEB95D3D4FF /* Frameworks */ = {
+		1D47C962A700457BBA813A96 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -244,7 +242,11 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = H2B4PA98F9;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = H2B4PA98F9;
 					};
 				};
 			};
@@ -253,6 +255,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -350,6 +353,20 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		C64036C1F9C14AE587647ABC /* Upload Debug Symbols to Sentry */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Upload Debug Symbols to Sentry";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export SENTRY_PROPERTIES=sentry.properties\n../node_modules/@sentry/cli/bin/sentry-cli upload-dsym";
+		};
 		FD4C38642228810C00325AF5 /* Start Packager */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -368,20 +385,6 @@
 			shellPath = /bin/sh;
 			shellScript = "export RCT_METRO_PORT=\"${RCT_METRO_PORT:=8081}\"\necho \"export RCT_METRO_PORT=${RCT_METRO_PORT}\" > \"${SRCROOT}/../node_modules/react-native/scripts/.packager.env\"\nif [ -z \"${RCT_NO_LAUNCH_PACKAGER+xxx}\" ] ; then\n  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then\n    if ! curl -s \"http://localhost:${RCT_METRO_PORT}/status\" | grep -q \"packager-status:running\" ; then\n      echo \"Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly\"\n      exit 2\n    fi\n  else\n    open \"$SRCROOT/../node_modules/react-native/scripts/launchPackager.command\" || echo \"Can't start packager automatically\"\n  fi\nfi\n";
 			showEnvVarsInLog = 0;
-		};
-		C64036C1F9C14AE587647ABC /* Upload Debug Symbols to Sentry */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			name = "Upload Debug Symbols to Sentry";
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			shellPath = /bin/sh;
-			shellScript = "export SENTRY_PROPERTIES=sentry.properties\n../node_modules/@sentry/cli/bin/sentry-cli upload-dsym";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -431,6 +434,7 @@
 			baseConfigurationReference = 59CB29AFAEF3FDEB70A955C7 /* Pods-gdnoTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = H2B4PA98F9;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -455,6 +459,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = H2B4PA98F9;
 				INFOPLIST_FILE = gdnoTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -476,6 +481,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = H2B4PA98F9;
 				INFOPLIST_FILE = gdno/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -495,6 +501,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = H2B4PA98F9;
 				INFOPLIST_FILE = gdno/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (

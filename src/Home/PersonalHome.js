@@ -24,10 +24,10 @@ const styles = StyleSheet.create({
     padding: space[2],
   },
   weatherSection: {
-    marginBottom: space[3],
+    marginBottom: space[4],
   },
   plants: {
-    marginTop: space[2],
+    marginTop: space[8],
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',

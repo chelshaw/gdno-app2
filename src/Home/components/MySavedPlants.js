@@ -8,10 +8,9 @@ import PropTypes from 'prop-types';
 
 import handleError from '../../shared/data/handleError';
 import {
-  Touchable, PageLoader, ErrorState, Type, Button
+  Touchable, PageLoader, ErrorState, Type, Button, PlantBlock
 } from '../../shared/components';
 import { space, centered } from '../../shared/constants';
-import PlantBlock from './PlantBlock';
 import { loadStoredPlants } from '../data';
 
 const styles = StyleSheet.create({

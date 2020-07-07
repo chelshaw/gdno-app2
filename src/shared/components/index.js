@@ -29,6 +29,7 @@ export { ClearButton } from './Button';
 export { default as LogOutButton } from './LogOutButton';
 export { default as ErrorState } from './ErrorState';
 export { default as PageLoader } from './PageLoader';
+export { default as PlantBlock } from './PlantBlock';
 export { default as StyledInput } from './StyledInput';
 
 /* GALAXIES */

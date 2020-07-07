@@ -151,7 +151,7 @@ const PersonalHome = ({ navigation }) => {
           <View style={styles.plantsSection}>
             <Media direction="row" style={styles.plantTitles}>
               <Media.Body>
-                <DetailHeader weight="bold">My plants</DetailHeader>
+                <DetailHeader weight="bold">My garden</DetailHeader>
               </Media.Body>
               <Media.Item>
                 <Touchable onPress={handleAddPlantPress} hitSlop={hitSlop}>

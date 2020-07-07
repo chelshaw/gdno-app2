@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
-  Platform,
   Alert,
+  Linking,
+  Clipboard,
 } from 'react-native';
-import * as WebBrowser from 'expo-web-browser';
 import PropTypes from 'prop-types';
 
 import handleError from '../shared/data/handleError';
@@ -49,7 +49,6 @@ const styles = StyleSheet.create({
   },
 
   buttonText: {
-    // flex: 1,
     paddingRight: space[1],
   },
 });
@@ -70,20 +69,24 @@ export default class HomeScreen extends Component {
     );
   }
 
+  handleLinkError = () => {
+    Alert.alert(
+      'Whoops',
+      `That link didn't work how we thought it would. Reach out to ${LINKS.helpEmail} for help.`,
+      [
+        { text: 'Copy email', onPress: () => Clipboard.setString(LINKS.helpEmail) },
+      ]
+    );
+  }
+
   handleOpenLink = (path) => {
-    // TODO check and handle deep link before opening
     const url = LINKS[path] || LINKS.shop;
-    if (path === 'help' && Platform.OS === 'ios') {
-      this.props.navigation.navigate('Help');
-    } else if (Platform.OS === 'ios' && url.indexOf('mailto:') >= 0) {
-      this.handleIosMailto(url);
-    } else {
-      try {
-        WebBrowser.openBrowserAsync(url);
-      } catch (e) {
+    Linking
+      .openURL(url)
+      .catch((e) => {
         handleError(e);
-      }
-    }
+        this.handleLinkError(url);
+      });
   }
 
   render() {

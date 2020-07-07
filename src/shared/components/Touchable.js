@@ -13,6 +13,7 @@ const Touchable = ({
   disabled = false,
   children,
   navigation,
+  ...rest,
 }) => {
   let handlePress = onPress;
   if (typeof onPress === 'string') {
@@ -27,6 +28,7 @@ const Touchable = ({
       accessibilityLabel={accessibilityLabel}
       accessibilityRole="button"
       accessibilityStates={accessibilityStates}
+      {...rest}
     >
       {children}
     </TouchableComponent>

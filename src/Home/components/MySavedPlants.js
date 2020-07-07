@@ -43,12 +43,14 @@ const MySavedPlants = ({
   navigate,
   signout,
   reloadToggle,
+  onAddPlant,
   ...passedProps,
 }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [errorCount, setErrorCount] = useState(0);
   const [plants, setPlants] = useState([]);
+  // TODO: check against db for updates
 
   useEffect(() => {
     setLoading(true);
@@ -98,8 +100,12 @@ const MySavedPlants = ({
     return (<ErrorState callToAction={actionText} action={handleErrorAction} />);
   }
 
-  const handlePlantPress = name => () => {
-    navigate('CareGuide', { name });
+  const handlePlantPress = ({ nickname, name, id }) => () => {
+    navigate('CareGuide', {
+      nickname,
+      name,
+      id,
+    });
   };
 
   return (
@@ -108,12 +114,12 @@ const MySavedPlants = ({
         ? (
           <ScrollView horizontal style={[styles.plants, style]} {...passedProps}>
             {plants.map(plant => (
-              <Touchable onPress={handlePlantPress(plant.name)} key={plant.name}>
+              <Touchable onPress={handlePlantPress(plant)} key={plant.id}>
                 <PlantBlock
                   style={styles.spaced}
-                  name={plant.name}
+                  species={plant.species}
                   nickname={plant.nickname || ''}
-                  imageUrl={plant.images ? plant.images[0].thumbnails.large.url : ''}
+                  imageUrl={plant.thumbnail}
                 />
               </Touchable>
             ))
@@ -124,7 +130,7 @@ const MySavedPlants = ({
           <View style={styles.emptyState}>
             <Type size={18} align="center" italic weight="light">Your garden is looking a bit empty!</Type>
             <View style={styles.topMargin}>
-              <Button onPress="AddCareGuides">Let&apos;s get growing</Button>
+              <Button onPress={onAddPlant}>Let&apos;s get growing</Button>
             </View>
           </View>
         )
@@ -138,6 +144,7 @@ MySavedPlants.propTypes = {
   style: PropTypes.object,
   signout: PropTypes.func,
   reloadToggle: PropTypes.number,
+  onAddPlant: PropTypes.func,
 };
 
 export default MySavedPlants;

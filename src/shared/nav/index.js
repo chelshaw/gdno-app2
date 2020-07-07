@@ -5,11 +5,10 @@ import { View, Image } from 'react-native';
 import logo from '../assets/icon-transparent.png';
 import PersonIcon from '../components/PersonIcon';
 import PersonalHome from '../../Home/PersonalHome';
-import AddCareGuides from '../../CareGuides/AddCareGuides';
+import AddCareGuide from '../../CareGuides/AddCareGuide';
 import CareGuide from '../../CareGuides/CareGuide';
 import Settings from '../../Auth/Settings';
 import EditSettings from '../../Auth/EditSettings';
-import Help from '../../Help/Help';
 import GettingStarted from '../../GettingStarted/GettingStarted';
 import { Touchable } from '../components';
 import { centeredHeader, hitSlop } from '../constants';
@@ -38,15 +37,19 @@ const MainNavigation = createStackNavigator(
         ),
       }),
     },
-    AddCareGuides: {
-      screen: AddCareGuides,
+    AddCareGuide: {
+      screen: AddCareGuide,
       navigationOptions: () => ({
-        headerTitle: 'Add Care Guides',
+        headerTitle: 'Add Care Guide',
         ...centeredHeader,
       }),
     },
-    CareGuide,
-    Help,
+    CareGuide: {
+      screen: CareGuide,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
     Settings: {
       screen: Settings,
       path: 'settings',

@@ -5,10 +5,12 @@ import React, {
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import { firebaseConfig } from './secrets';
-import { setValue } from './data/localStorage';
+import { updateUser, setVersion } from './data/localStorage';
 import handleError from './data/handleError';
 
 firebase.initializeApp(firebaseConfig);
+
+const currentVersion = '0.4.0';
 
 const authContext = createContext();
 
@@ -19,7 +21,7 @@ function useProvideAuth() {
   const [features, setFeatures] = useState([]);
 
   const storeZipcode = (zipcode) => {
-    setValue('S_zipcode', zipcode);
+    updateUser({ zipcode });
   };
 
   const fetchAndSaveUserFeatures = async (userId) => {
@@ -43,15 +45,24 @@ function useProvideAuth() {
 
   const signin = (email, password) => firebase
     .auth()
-    .signInWithEmailAndPassword(email, password)
-    .then((response) => {
-      setUser(response.user);
-      return response.user;
-    })
-    .then((u) => {
-      fetchAndSaveUserFeatures(u.uid);
-      return u;
-    });
+    .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+    .then(() => firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then((response) => {
+        setUser(response.user);
+        return response.user;
+      })
+      .then((u) => {
+        updateUser({ uid: u.uid });
+        fetchAndSaveUserFeatures(u.uid);
+        return u;
+      })
+      .catch((err) => {
+        handleError(err);
+        throw err;
+      }));
+
 
   const signup = (email, password) => firebase
     .auth()
@@ -65,7 +76,7 @@ function useProvideAuth() {
     .auth()
     .signOut()
     .then(() => {
-      setUser(false);
+      setUser(null);
     });
 
   const sendPasswordResetEmail = email => firebase
@@ -84,9 +95,10 @@ function useProvideAuth() {
     const unsubscribe = firebase.auth().onAuthStateChanged((u) => {
       if (u) {
         setUser(u);
+        setVersion(currentVersion);
         fetchAndSaveUserFeatures(u.uid);
       } else {
-        setUser(false);
+        setUser(null);
       }
     });
 

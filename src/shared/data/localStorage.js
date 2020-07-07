@@ -1,29 +1,49 @@
 import { AsyncStorage } from 'react-native';
 import handleError from './handleError';
 
+/*
+ * LOCAL DATA STRUCTURE
+ * Different types of data should be stored locally.
+ * User specific (zipcode, uid, lastVersion?)
+ * User's plants (independent of the plant data)
+ * Plant species data (no dupes)
+ *
+ * Typical user's data store might look like:
+ * @GDNO_USER_INFO => { uid, zipcode/lat,lng }
+ * @GDNO_INFO_VERSION => '0.4.0' (or whatever their latest version is)
+ * @GDNO_PLANT_{ID} => { plant info }
+ * @GDNO_SPECIES_{PLANTID} => { species info }
+ */
+
 export const keyTypes = {
-  plants: 'PLANTS',
-  settings: 'SETTINGS',
+  info: 'INFO',
+  user: 'USER',
+  plant: 'PLANT',
+  species: 'SPECIES',
 };
 
-export const setValue = async (key, value) => {
+const setValue = async (key, type, value) => {
   let val = value;
   if (!key) throw new Error('No key defined');
+  if (!keyTypes[type]) throw new Error('Bad storage key type');
   if (typeof value !== 'string') {
     val = JSON.stringify(value);
   }
   try {
-    await AsyncStorage.setItem(`@GDNO_${key}`, val);
+    return AsyncStorage.setItem(`@GDNO_${keyTypes[type]}_${key}`, val);
   } catch (e) {
     handleError(e);
     throw e;
   }
 };
+export const storePlant = (key, value) => setValue(key, 'plant', value);
+export const storeSpecies = (key, value) => setValue(key, 'species', value);
+export const setVersion = version => setValue('VERSION', 'info', version);
 
-export const getValue = async (key) => {
+const getValue = async (key, type) => {
   let value;
   try {
-    value = await AsyncStorage.getItem(`@GDNO_${key}`);
+    value = await AsyncStorage.getItem(`@GDNO_${keyTypes[type]}_${key}`);
   } catch (e) {
     handleError(e);
     throw e;
@@ -34,15 +54,30 @@ export const getValue = async (key) => {
     return value;
   }
 };
+export const retrievePlant = key => getValue(key, 'plant');
+export const retrieveSpecies = key => getValue(key, 'species');
+export const retrieveUser = () => getValue('INFO', 'user');
+export const retrieveVersion = () => getValue('VERSION', 'info');
 
-export const removeMultipleValues = (
-  keys,
-  onError = () => {}
-) => AsyncStorage.multiRemove(keys, onError);
+const updateValue = async (key, type, data) => {
+  let existing;
+  if (!key) throw new Error('No key defined');
+  if (!keyTypes[type]) throw new Error('Bad storage key type');
+  try {
+    existing = await getValue(key, type);
+    if (!existing) {
+      return setValue(key, type, data);
+    }
+    return AsyncStorage.mergeItem(`@GDNO_${keyTypes[type]}_${key}`, JSON.stringify(data));
+  } catch (e) {
+    handleError(e);
+    throw e;
+  }
+};
+export const updatePlant = (key, data) => updateValue(key, 'plant', data);
+export const updateUser = data => updateValue('INFO', 'user', data);
 
-export const setMultipleValues = keypairs => AsyncStorage.multiSet(keypairs);
-
-export const getMultipleValues = async (keys) => {
+const getMultipleValues = async (keys) => {
   let values;
   try {
     values = await AsyncStorage.multiGet(keys);
@@ -54,18 +89,13 @@ export const getMultipleValues = async (keys) => {
   return values;
 };
 
-export const removeKeys = (keys) => {
-  const gdnoKeys = keys.map(k => `@GDNO_${k}`);
-  return AsyncStorage.multiRemove(gdnoKeys);
-};
-
+// Used for debug mode only
 export const getAllKeysOfType = async (type) => {
-  const pattern = /(@GDNO)(_.*?_)/;
   let filter = () => false;
-  if (type === keyTypes.settings) {
-    filter = key => key.indexOf('@GDNO_S_') >= 0;
-  } else if (type === keyTypes.plants) {
-    filter = key => !key.match(pattern);
+  if (keyTypes[type]) {
+    filter = key => key.indexOf(`@GDNO_${keyTypes[type]}_`) >= 0;
+  } else if (type === 'all') {
+    filter = () => true;
   }
   let keyList;
   try {
@@ -74,27 +104,16 @@ export const getAllKeysOfType = async (type) => {
     handleError(e);
     throw e;
   }
-
-  return keyList.filter(filter);
+  const filtered = keyList.filter(filter);
+  return filtered;
 };
 
-export const getStoredDataOfType = async (type) => {
-  const pattern = /(@GDNO)(_.*?_)/;
-  let filter = () => false;
-  if (type === keyTypes.settings) {
-    filter = key => key.indexOf('@GDNO_S_') >= 0;
-  } else if (type === keyTypes.plants) {
-    filter = key => !key.match(pattern);
-  }
+const retrieveDataOfType = async (type) => {
   let keyList;
   let results;
   try {
-    keyList = await AsyncStorage.getAllKeys();
-    results = await getMultipleValues(
-      keyList
-        .filter(key => key.indexOf('@GDNO_') >= 0)
-        .filter(filter)
-    );
+    keyList = await getAllKeysOfType(type);
+    results = await getMultipleValues(keyList);
   } catch (e) {
     handleError(e);
     throw e;
@@ -106,30 +125,56 @@ export const getStoredDataOfType = async (type) => {
   return results;
 };
 
-export const clearAllKeys = async () => {
+export const retrieveParsedDataOfType = async (type) => {
+  let data;
+  try {
+    data = await retrieveDataOfType(type);
+  } catch (e) {
+    handleError(e);
+    throw e;
+  }
+
+  return data.map((d) => {
+    try {
+      return JSON.parse(d[1]);
+    } catch (e) {
+      return d;
+    }
+  });
+};
+
+export const removeStorage = key => AsyncStorage.removeItem(key);
+
+export const deletePlant = key => removeStorage(`@GDNO_${keyTypes.plant}_${key}`);
+
+export const clearPlantStorage = async () => {
+  try {
+    const userKeys = await getAllKeysOfType('plant');
+    return AsyncStorage.multiRemove(userKeys);
+  } catch (e) {
+    handleError(e);
+    throw e;
+  }
+};
+
+export const clearUserStorage = async () => {
+  try {
+    const userKeys = await getAllKeysOfType('user');
+    return AsyncStorage.multiRemove(userKeys);
+  } catch (e) {
+    handleError(e);
+    throw e;
+  }
+};
+
+export const clearStorage = async () => {
   let keys;
   try {
-    keys = await AsyncStorage.getAllKeys();
+    keys = await getAllKeysOfType('all');
   } catch (e) {
     handleError(e);
   }
   AsyncStorage.multiRemove(keys, (e) => {
     if (e) handleError(e);
-  });
-};
-
-export const clearSettings = async () => {
-  // TODO: Replace with removing just UID
-  let keys;
-  try {
-    keys = await getAllKeysOfType('SETTINGS');
-  } catch (e) {
-    handleError(e);
-  }
-  const keylist = keys.filter(
-    key => key.indexOf('@GDNO_') < 0 || key.indexOf('GDNO_S_') >= 0
-  );
-  removeMultipleValues(keylist, (e) => {
-    if (e) throw e;
   });
 };

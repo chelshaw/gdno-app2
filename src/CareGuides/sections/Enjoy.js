@@ -20,7 +20,7 @@ const ss = StyleSheet.create({
 const Enjoy = ({
   info
 }) => {
-  if (!info) return <ActivityIndicator />;
+  if (!info) return <ActivityIndicator size="large" />;
 
   return (
     <View style={ss.main}>

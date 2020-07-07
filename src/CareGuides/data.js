@@ -1,95 +1,141 @@
-import { performGet, performMultipleGet } from '../shared/data/rest';
+import * as firebase from 'firebase';
+import 'firebase/firestore';
+
 import handleError from '../shared/data/handleError';
 import {
-  keyTypes, getStoredDataOfType, setValue, removeKeys, getValue
+  retrieveParsedDataOfType,
+  storePlant,
+  storeSpecies,
+  retrievePlant,
+  retrieveSpecies,
+  updatePlant,
+  deletePlant,
 } from '../shared/data/localStorage';
-import { airtableKey, airtableUrl } from '../shared/secrets';
 
-const keyifyName = name => name.toString().trim().toLowerCase().replace(/[^a-z0-9]/g, '');
-
-export const getPlantData = async () => {
-  let plantList;
-  try {
-    const result = await performGet(
-      `${airtableUrl}/Plants?view=overview`,
-      {},
-      { Authorization: `Bearer ${airtableKey}` }
-    );
-    plantList = result.data.records
-      .filter(p => !!p.fields && p.fields.Herb && p.fields.selling)
-      .map(p => ({
-        name: p.fields.Herb,
-        id: p.id,
-        key: keyifyName(p.fields.Herb),
-        imageUrl: p.fields.images ? p.fields.images[0].thumbnails.large.url : '',
-      }));
-  } catch (e) {
+export const getPlantList = () => {
+  const query = firebase.firestore().collection('speciesList').orderBy('name');
+  return query.get().then((querySnapshot) => {
+    const plantList = [];
+    querySnapshot.forEach((doc) => {
+      const fields = doc.data();
+      plantList.push({
+        id: doc.id,
+        ...fields,
+      });
+    });
+    return plantList;
+  }).catch((e) => {
     handleError(e);
     throw e;
-  }
-  return plantList;
+  });
 };
 
 export const loadStoredPlants = async () => {
   try {
-    const plants = await getStoredDataOfType(keyTypes.plants);
-    return plants.map(v => JSON.parse(v[1]));
+    const plants = await retrieveParsedDataOfType('plant');
+    return plants;
   } catch (e) {
     handleError(e);
     throw e;
   }
 };
 
-export const loadStoredPlantByName = async (name) => {
-  const key = keyifyName(name);
-  let plantInfo;
-  try {
-    plantInfo = await getValue(key);
-  } catch (e) {
-    handleError(e);
-    throw e;
-  }
-  return plantInfo;
-};
+const updateUserPlantInDb = (userId, id, updates) => firebase
+  .firestore()
+  .collection('users')
+  .doc(userId)
+  .collection('myPlants')
+  .doc(id)
+  .update(updates)
+  .then(() => updates);
 
-const savePlantsToStorage = (plants) => {
-  const saveItems = plants.map((plant) => {
-    const key = keyifyName(plant.data.fields.Herb);
-    const data = {
-      ...plant.data.fields,
-      id: plant.data.id,
-      key,
-      name: plant.data.fields.Herb,
-      imageUrl: plant.data.fields.images ? plant.data.fields.images[0].thumbnails.large.url : '',
-    };
-    return setValue(key, data);
+const deleteUserPlantInDb = (userId, id) => firebase
+  .firestore()
+  .collection('users')
+  .doc(userId)
+  .collection('myPlants')
+  .doc(id)
+  .delete()
+  .then(() => true);
+
+const updateSavedPlant = (plantId, updates) => updatePlant(plantId, updates);
+
+const removeSavedPlant = plantId => deletePlant(plantId);
+
+export const updatePlantInfoById = async (
+  userId,
+  id,
+  updates,
+) => updateUserPlantInDb(userId, id, updates)
+  .then(() => updateSavedPlant(id, updates))
+  .catch((err) => {
+    handleError(err);
+    throw err;
   });
-  return Promise.all(saveItems);
-};
 
-export const getAndSavePlantsToStorage = async (plantIds) => {
-  let results;
-  const requests = plantIds.map(id => ({
-    url: `${airtableUrl}/Plants/${id}`,
-    headers: { Authorization: `Bearer ${airtableKey}` },
-  }));
+export const deletePlantById = (userId, id) => deleteUserPlantInDb(userId, id)
+  .then(() => removeSavedPlant(id))
+  .catch((err) => {
+    handleError(err);
+    throw err;
+  });
+
+export const getPlantInfoById = async (id) => {
+  let plant;
+  let species;
   try {
-    results = await performMultipleGet(requests);
+    plant = await retrievePlant(id);
+    species = await retrieveSpecies(plant.speciesId);
   } catch (e) {
     handleError(e);
-    throw (e);
+    throw e;
   }
-  return savePlantsToStorage(results);
+  return {
+    ...species,
+    ...plant,
+  };
 };
 
-export const removePlantsByName = async (plantNames) => {
-  const names = plantNames.map(name => keyifyName(name));
-  let success;
+const fetchAndSavePlantSpecies = async (speciesId) => {
+  let speciesInfo;
   try {
-    success = await removeKeys(names);
+    const result = await firebase
+      .firestore()
+      .collection('species')
+      .doc(speciesId)
+      .get();
+    speciesInfo = result.data();
+    return storeSpecies(speciesId, speciesInfo);
+  } catch (e) {
+    throw e;
+  }
+};
+
+export const storeUserPlant = async (dbId, plant) => {
+  let result;
+  try {
+    result = await storePlant(dbId, { ...plant, id: dbId });
   } catch (e) {
     handleError(e);
-    throw (e);
   }
-  return success;
+  return fetchAndSavePlantSpecies(plant.speciesId, result);
+};
+
+export const downloadPlant = (userId, plantOverview) => {
+  const db = firebase.firestore();
+  if (!userId) throw new Error('Missing User Id');
+  const now = Date.now();
+  const plant = {
+    speciesId: plantOverview.id,
+    species: plantOverview.name,
+    thumbnail: plantOverview.thumbnail,
+    plantedTimestamp: now,
+    nickname: '',
+    notificationsEnabled: false,
+    lastWatered: now,
+  };
+  return db.collection('users').doc(userId).collection('myPlants').add(plant)
+    .then(docRef => docRef.id)
+    .then(docId => storeUserPlant(docId, plant))
+    .catch(err => handleError(err));
 };

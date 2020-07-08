@@ -8,7 +8,7 @@ import { Type } from '../../shared/components';
 import handleError from '../../shared/data/handleError';
 import WeatherBlock from './WeatherBlock';
 import RelatableWeather from './RelatableWeather';
-import { loadWeatherDataFromCoords, getCoordsForZip } from '../data';
+import { getDailyWeatherForZipcode } from '../data';
 
 const styles = StyleSheet.create({
   weather: {
@@ -33,10 +33,10 @@ const Weather = ({
   const [weatherDays, setWeatherDays] = useState(null);
   const [error, setError] = useState(null);
 
-  const fetchWeatherForCoordinates = (lat, lng) => {
-    loadWeatherDataFromCoords(lat, lng)
-      .then((results) => {
-        setWeatherDays(results.daily.data);
+  const getAndSetWeatherData = (zip) => {
+    getDailyWeatherForZipcode(zip)
+      .then((dailyData) => {
+        setWeatherDays(dailyData);
         setLoading(false);
       })
       .catch((err) => {
@@ -46,19 +46,10 @@ const Weather = ({
       });
   };
 
-  const fetchWeatherFromZip = async (zip) => {
-    try {
-      const coords = getCoordsForZip(zip);
-      fetchWeatherForCoordinates(coords.LAT, coords.LNG);
-    } catch (e) {
-      setError(e.message);
-    }
-  };
-
   useEffect(() => {
     if (zipcode && zipcode !== 'loading') {
       setError(null);
-      fetchWeatherFromZip(zipcode);
+      getAndSetWeatherData(zipcode);
     }
   }, [zipcode]);
 

@@ -31,7 +31,7 @@
       "versionCode": 18,
       "permissions": [],
       "playStoreUrl": "https://play.google.com/store/apps/details?id=com.growgardenio.gardenio",
-      "icon": "./src/shared/assets/android-icon.png",
+      "icon": "./src/shared/assets/android-icon.png"
     },
     "packagerOpts": {
       "config": "metro.config.js",

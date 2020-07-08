@@ -1,8 +1,9 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
-import { COLORS, space } from '../../shared/constants';
-import { ThumbnailWithFallback, Type } from '../../shared/components';
+import { COLORS, space } from '../constants';
+import Type from './Type';
+import ThumbnailWithFallback from './ThumbnailWithFallback';
 
 const styles = StyleSheet.create({
   plantBlock: {

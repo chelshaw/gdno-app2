@@ -3,7 +3,6 @@ import {
   StyleSheet,
   View,
   ActivityIndicator,
-  Picker,
   Alert,
 } from 'react-native';
 
@@ -13,7 +12,7 @@ import {
   PROPSHAPES, COLORS, space, centered
 } from '../shared/constants';
 import {
-  Button, ErrorState, Media, ThumbnailWithFallback, Type
+  Type, ErrorState, Media, PlantBlock, Touchable
 } from '../shared/components';
 
 import {
@@ -27,37 +26,23 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   centered,
-  centeredWrapper: {
-    flex: 1,
-    justifyContent: 'center',
-    alignContent: 'center',
-  },
   bottomButton: {
-    borderBottomWidth: 1,
-    borderBottomColor: COLORS.lightGray,
-    padding: space[2],
+    padding: space[4],
   },
-  thumbnailWrapper: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignContent: 'center',
+  plantBlocksWrapper: {
+    flex: 1,
+    flexWrap: 'wrap',
+    flexDirection: 'row'
   },
-  defaultThumbnail: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    backgroundColor: COLORS.lightGray,
-  },
-
+  plantBlock: {
+    borderColor: COLORS.white,
+  }
 });
-
-const defaultSelection = { label: 'Pick yer plant', id: null };
 
 const AddCareGuideScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [speciesList, setSpeciesList] = useState([]);
-  const [selection, setSelection] = useState(defaultSelection);
   const auth = useAuth();
 
   const fetchAllPlants = () => {
@@ -73,12 +58,6 @@ const AddCareGuideScreen = ({ navigation }) => {
         setError(true);
         setLoading(false);
       });
-  };
-
-  const handlePlantSelect = (speciesId) => {
-    setSelection(
-      [...speciesList, defaultSelection].find(s => s.id === speciesId)
-    );
   };
 
   const triggerErrorMessage = (message = 'Something went wrong. Please try again later.') => (
@@ -97,14 +76,15 @@ const AddCareGuideScreen = ({ navigation }) => {
     )
   );
 
-  const handleDownloadPress = () => {
-    if (!auth.user || !auth.user.uid || !selection || !selection.id) {
+  const handlePlantSelect = (speciesId) => {
+    if (!auth.user || !auth.user.uid) {
       triggerErrorMessage('Something went wrong. Try logging in again and contact us if it persists.');
       return;
     }
+    const selected = speciesList.find(s => s.id === speciesId);
     setError(false);
     setLoading(true);
-    downloadPlant(auth.user.uid, selection)
+    downloadPlant(auth.user.uid, selected)
       .then(() => {
         setLoading(false);
         navigation.goBack();
@@ -132,42 +112,22 @@ const AddCareGuideScreen = ({ navigation }) => {
               <ActivityIndicator size="large" color={COLORS.magenta} />
             </View>
           ) : (
-            <View style={styles.centeredWrapper}>
-              <View style={styles.thumbnailWrapper}>
-                {selection.id
-                  ? (
-                    <ThumbnailWithFallback
-                      size={100}
-                      imageUrl={selection.thumbnail}
-                      name={selection.name}
-                    />
-                  )
-                  : (<View style={styles.defaultThumbnail}><Type color="medGray" size={80} align="center">?</Type></View>)
-              }
-              </View>
-              <Picker
-                style={styles.plantPicker}
-                selectedValue={selection.id}
-                onValueChange={
-                  value => handlePlantSelect(value)
-                }
-              >
-                <Picker.Item label={defaultSelection.label} value={defaultSelection.id} />
-                {speciesList.map(species => (
-                  <Picker.Item key={species.id} label={species.name} value={species.id} />
-                ))}
-              </Picker>
+            <View style={styles.plantBlocksWrapper}>
+              {speciesList.map(species => (
+                <Touchable key={species.id} onPress={() => handlePlantSelect(species.id)}>
+                  <PlantBlock
+                    style={styles.plantBlock}
+                    species={species.name}
+                    imageUrl={species.thumbnail}
+                  />
+                </Touchable>
+              ))}
             </View>
           )
         }
       </Media.Body>
       <Media.Item style={styles.bottomButton}>
-        <Button
-          disabled={loading || selection.id === null}
-          onPress={handleDownloadPress}
-        >
-          Download
-        </Button>
+        <Type align="center">More coming soon.</Type>
       </Media.Item>
     </Media>
   );

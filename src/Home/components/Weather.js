@@ -8,7 +8,7 @@ import { Type } from '../../shared/components';
 import handleError from '../../shared/data/handleError';
 import WeatherBlock from './WeatherBlock';
 import RelatableWeather from './RelatableWeather';
-import { getDailyWeatherForZipcode } from '../data';
+import { getDailyWeatherAndLocationForZipcode } from '../data';
 
 const styles = StyleSheet.create({
   weather: {
@@ -20,6 +20,9 @@ const styles = StyleSheet.create({
   },
   loadingWrapper: {
     padding: space[4],
+  },
+  locationWrapper: {
+    paddingHorizontal: space[2],
   }
 });
 
@@ -31,16 +34,18 @@ const Weather = ({
 }) => {
   const [loading, setLoading] = useState(false);
   const [weatherDays, setWeatherDays] = useState(null);
+  const [location, setLocation] = useState('');
   const [error, setError] = useState(null);
 
   const getAndSetWeatherData = (zip) => {
-    getDailyWeatherForZipcode(zip)
-      .then((dailyData) => {
-        setWeatherDays(dailyData);
+    getDailyWeatherAndLocationForZipcode(zip)
+      .then((data) => {
+        setWeatherDays(data.dailyData);
+        setLocation(data.locality);
         setLoading(false);
       })
       .catch((err) => {
-        setError('Our weather coconut is broken. Please try again later.');
+        setError(err.message);
         setLoading(false);
         handleError(err);
       });
@@ -71,6 +76,11 @@ const Weather = ({
 
   return (
     <>
+      <View style={styles.locationWrapper}>
+        <Type lineHeight={1}>
+          {`Somewhere near ${location || zipcode}`}
+        </Type>
+      </View>
       <ScrollView horizontal bounces={false} style={[styles.weather, style]} {...passedProps}>
         {!!weatherDays && weatherDays.map(day => (
           <WeatherBlock key={day.time} {...day} />

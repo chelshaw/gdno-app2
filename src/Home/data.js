@@ -8,17 +8,29 @@ import {
 } from '../shared/data/localStorage';
 import { DARKSKY_KEY, GEOCODE_KEY } from '../shared/secrets';
 
-const getCoordsForZip = async (zipcode) => {
+const getFirstOfArray = (arr) => {
+  if (!arr || arr.length === 0) {
+    return null;
+  }
+  return arr[0];
+};
+const getCoordsAndLocalityForZip = async (zipcode) => {
   const url = `https://maps.googleapis.com/maps/api/geocode/json?key=${GEOCODE_KEY}&components=postal_code:${zipcode}`;
   try {
     const apiResponse = await performGet(url);
-    if (!apiResponse.data.results) {
-      throw new Error('Unable to locate you. Please check your saved zipcode.');
+    const firstResponse = getFirstOfArray(apiResponse.data.results);
+    if (!firstResponse || !firstResponse.geometry) {
+      throw new Error(`We were unable to locate you based on the zipcode ${zipcode}. Are you sure that's right?`);
     }
-    const { location } = apiResponse.data.results[0].geometry;
+    const { location } = apiResponse.data.results[0].geometry || {};
+    const { postcode_localities: locals } = apiResponse.data.results[0];
     // returns shape { lat, lng }
-    return location;
+    return {
+      ...location,
+      locality: locals ? locals[0] : '',
+    };
   } catch (err) {
+    handleError(err);
     throw err;
   }
 };
@@ -36,14 +48,16 @@ const loadWeatherDataFromCoords = async (lat, lng) => {
   return weatherData;
 };
 
-export const getDailyWeatherForZipcode = async (zipcode) => {
-  let coords;
-  let weatherData;
+export const getDailyWeatherAndLocationForZipcode = async (zipcode) => {
   try {
-    coords = await getCoordsForZip(zipcode);
-    weatherData = await loadWeatherDataFromCoords(coords.lat, coords.lng);
-    return weatherData.daily.data;
+    const { lat, lng, locality } = await getCoordsAndLocalityForZip(zipcode);
+    const weatherData = await loadWeatherDataFromCoords(lat, lng);
+    return {
+      dailyData: weatherData.daily.data,
+      locality,
+    };
   } catch (e) {
+    handleError(e);
     throw e;
   }
 };

@@ -3,8 +3,8 @@
   "displayName": "Gardenio",
   "expo": {
     "name": "Gardenio",
-    "description": "Let's grow together",
-    "slug": "gdno",
+    "description": "You don't have to grow it alone! Gardenio is a new kind of garden club, connecting Texans to the information, supplies, and people they need to start growing their own food. See what we're all about and join today at https://growgardenio.com",
+    "slug": "gardenio",
     "privacy": "unlisted",
     "sdkVersion": "35.0.0",
     "version": "0.5.1",
@@ -40,6 +40,12 @@
         "jsx",
         "svg"
       ]
+    },
+    "assetBundlePatterns": [
+      "src/shared/assets/*"
+    ],
+    "updates": {
+      "fallbackToCacheTimeout": 0
     }
   }
 }

@@ -6,6 +6,9 @@ import { performGet } from '../shared/data/rest';
 import {
   retrieveUser, retrieveParsedDataOfType
 } from '../shared/data/localStorage';
+import {
+  storeUserPlant,
+} from '../shared/data/plantStorage';
 import { DARKSKY_KEY, GEOCODE_KEY } from '../shared/secrets';
 
 const getFirstOfArray = (arr) => {
@@ -14,6 +17,7 @@ const getFirstOfArray = (arr) => {
   }
   return arr[0];
 };
+
 const getCoordsAndLocalityForZip = async (zipcode) => {
   const url = `https://maps.googleapis.com/maps/api/geocode/json?key=${GEOCODE_KEY}&components=postal_code:${zipcode}`;
   try {
@@ -72,7 +76,7 @@ export const loadStoredPlants = async () => {
   }
 };
 
-export const fetchUserPlants = userId => firebase
+const fetchUserPlants = userId => firebase
   .firestore()
   .collection('users')
   .doc(userId)
@@ -94,6 +98,38 @@ export const fetchUserPlants = userId => firebase
     throw e;
   });
 
+
+const saveMyPlantsLocally = (userId, myPlants) => {
+  if (!userId) return;
+  const promises = myPlants.map(plant => storeUserPlant(plant));
+  Promise.all(promises).finally(() => {});
+};
+
+const fetchAndDownloadUserPlants = async (userId) => {
+  let userPlants;
+  try {
+    const fetchedPlants = await fetchUserPlants(userId);
+    userPlants = fetchedPlants.filter(plant => !plant.deletedOn);
+    saveMyPlantsLocally(userId, userPlants);
+    return userPlants;
+  } catch (e) {
+    handleError(e);
+    throw new Error('We couldn\'t fetch your plants. Please try again later.');
+  }
+};
+
+export const getUserPlants = async (userId) => {
+  let storedPlants;
+  try {
+    storedPlants = await loadStoredPlants();
+    if (!userId || storedPlants.length !== 0) return storedPlants;
+    return fetchAndDownloadUserPlants(userId);
+  } catch (e) {
+    handleError(e);
+    throw new Error('We were unable to get info about your garden :( please try again later.');
+  }
+};
+
 export const getSavedZipcode = async () => {
   let info = {};
   try {
@@ -105,6 +141,4 @@ export const getSavedZipcode = async () => {
   }
 };
 
-export default {
-  loadStoredPlants,
-};
+export default null;

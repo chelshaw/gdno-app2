@@ -4,13 +4,14 @@ import 'firebase/firestore';
 import handleError from '../shared/data/handleError';
 import {
   retrieveParsedDataOfType,
-  storePlant,
-  storeSpecies,
   retrievePlant,
   retrieveSpecies,
   updatePlant,
   deletePlant,
 } from '../shared/data/localStorage';
+import {
+  storeUserPlant
+} from '../shared/data/plantStorage';
 
 export const getPlantList = () => {
   const query = firebase.firestore().collection('speciesList').orderBy('name');
@@ -55,8 +56,9 @@ const deleteUserPlantInDb = (userId, id) => firebase
   .doc(userId)
   .collection('myPlants')
   .doc(id)
-  .delete()
-  .then(() => true);
+  .update({ deletedOn: Date.now() })
+  .then(() => true)
+  .catch((e) => { handleError(e); return false; });
 
 const updateSavedPlant = (plantId, updates) => updatePlant(plantId, updates);
 
@@ -96,39 +98,15 @@ export const getPlantInfoById = async (id) => {
   };
 };
 
-const fetchAndSavePlantSpecies = async (speciesId) => {
-  let speciesInfo;
-  try {
-    const result = await firebase
-      .firestore()
-      .collection('species')
-      .doc(speciesId)
-      .get();
-    speciesInfo = result.data();
-    return storeSpecies(speciesId, speciesInfo);
-  } catch (e) {
-    throw e;
-  }
-};
-
-export const storeUserPlant = async (dbId, plant) => {
-  let result;
-  try {
-    result = await storePlant(dbId, { ...plant, id: dbId });
-  } catch (e) {
-    handleError(e);
-  }
-  return fetchAndSavePlantSpecies(plant.speciesId, result);
-};
-
-export const downloadPlant = (userId, plantOverview) => {
+// TODO: Rename to downloadNewPlant
+export const downloadPlant = (userId, speciesListItem) => {
   const db = firebase.firestore();
   if (!userId) throw new Error('Missing User Id');
   const now = Date.now();
   const plant = {
-    speciesId: plantOverview.id,
-    species: plantOverview.name,
-    thumbnail: plantOverview.thumbnail,
+    speciesId: speciesListItem.id,
+    species: speciesListItem.name,
+    thumbnail: speciesListItem.thumbnail,
     plantedTimestamp: now,
     nickname: '',
     notificationsEnabled: false,
@@ -136,6 +114,6 @@ export const downloadPlant = (userId, plantOverview) => {
   };
   return db.collection('users').doc(userId).collection('myPlants').add(plant)
     .then(docRef => docRef.id)
-    .then(docId => storeUserPlant(docId, plant))
+    .then(docId => storeUserPlant({ ...plant, docId }))
     .catch(err => handleError(err));
 };

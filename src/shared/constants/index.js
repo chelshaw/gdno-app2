@@ -83,10 +83,10 @@ export const LINKS = {
   instagram: 'https://instagram.com/growgardenio',
   facebook: 'https://facebook.com/growgardenio',
   shop: 'https://growgardenio.com/',
-  help: 'mailto:rg+help@growgardenio.com',
-  helpEmail: 'rg+help@growgardenio.com',
-  feedback: 'chelsea+feedback@growgardenio.com',
-  feedbackEmail: 'chelsea+feedback@growgardenio.com',
+  help: 'mailto:wegotyou@growgardenio.com',
+  helpEmail: 'wegotyou@growgardenio.com',
+  feedback: 'mailto:wegotyou@growgardenio.com',
+  feedbackEmail: 'wegotyou@growgardenio.com',
   feedbackForm: 'https://airtable.com/shrG3FFkxA7iXfqAv',
 };
 

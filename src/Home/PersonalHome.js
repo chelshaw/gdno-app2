@@ -5,11 +5,12 @@ import {
   ScrollView,
   RefreshControl,
   Linking,
+  ActivityIndicator,
 } from 'react-native';
 import PropTypes from 'prop-types';
 
 import {
-  Touchable, Type, DetailHeader, Media, Button, ScreenWithBottomNav,
+  Touchable, Type, DetailHeader, Media, Button, ScreenWithBottomNav
 } from '../shared/components';
 import {
   space, COLORS, hitSlop, LINKS,
@@ -131,9 +132,9 @@ const PersonalHome = ({ navigation }) => {
             <View style={styles.sidePadding}>
               <DetailHeader weight="bold">What&apos;s it like outside?</DetailHeader>
             </View>
-            {zipcode || loadingZipcode ? (
+            {zipcode || loadingZipcode || !auth ? (
               <View style={{ paddingVertical: space[2] }}>
-                <Weather zipcode={zipcode} loadingZipcode={loadingZipcode} />
+                <Weather zipcode={zipcode} loadingZipcode={loadingZipcode || !auth.user} />
               </View>
             ) : (
               <View style={styles.infoBox}>
@@ -159,13 +160,16 @@ const PersonalHome = ({ navigation }) => {
                 </Touchable>
               </Media.Item>
             </Media>
-            <MySavedPlants
-              onAddPlant={handleAddPlantPress}
-              reloadToggle={reloadPlantsToggle}
-              navigate={navigation.navigate}
-              signout={auth.signout}
-              style={{ paddingLeft: space[2] }}
-            />
+            {auth && auth.user ? (
+              <MySavedPlants
+                onAddPlant={handleAddPlantPress}
+                reloadToggle={reloadPlantsToggle}
+                navigate={navigation.navigate}
+                signout={auth.signout}
+                user={auth.user}
+                style={{ paddingLeft: space[2] }}
+              />
+            ) : <ActivityIndicator />}
           </View>
           <View style={styles.feedbackSection}>
             <DetailHeader weight="bold">How can we do better?</DetailHeader>

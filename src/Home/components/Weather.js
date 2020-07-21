@@ -8,7 +8,7 @@ import { Type } from '../../shared/components';
 import handleError from '../../shared/data/handleError';
 import WeatherBlock from './WeatherBlock';
 import RelatableWeather from './RelatableWeather';
-import { loadWeatherDataFromCoords, getCoordsForZip } from '../data';
+import { getDailyWeatherAndLocationForZipcode } from '../data';
 
 const styles = StyleSheet.create({
   weather: {
@@ -20,6 +20,9 @@ const styles = StyleSheet.create({
   },
   loadingWrapper: {
     padding: space[4],
+  },
+  locationWrapper: {
+    paddingHorizontal: space[2],
   }
 });
 
@@ -31,34 +34,27 @@ const Weather = ({
 }) => {
   const [loading, setLoading] = useState(false);
   const [weatherDays, setWeatherDays] = useState(null);
+  const [location, setLocation] = useState('');
   const [error, setError] = useState(null);
 
-  const fetchWeatherForCoordinates = (lat, lng) => {
-    loadWeatherDataFromCoords(lat, lng)
-      .then((results) => {
-        setWeatherDays(results.daily.data);
+  const getAndSetWeatherData = (zip) => {
+    getDailyWeatherAndLocationForZipcode(zip)
+      .then((data) => {
+        setWeatherDays(data.dailyData);
+        setLocation(data.locality);
         setLoading(false);
       })
       .catch((err) => {
-        setError('Our weather coconut is broken. Please try again later.');
+        setError(err.message);
         setLoading(false);
         handleError(err);
       });
   };
 
-  const fetchWeatherFromZip = async (zip) => {
-    try {
-      const coords = getCoordsForZip(zip);
-      fetchWeatherForCoordinates(coords.LAT, coords.LNG);
-    } catch (e) {
-      setError(e.message);
-    }
-  };
-
   useEffect(() => {
     if (zipcode && zipcode !== 'loading') {
       setError(null);
-      fetchWeatherFromZip(zipcode);
+      getAndSetWeatherData(zipcode);
     }
   }, [zipcode]);
 
@@ -80,6 +76,11 @@ const Weather = ({
 
   return (
     <>
+      <View style={styles.locationWrapper}>
+        <Type lineHeight={1}>
+          {`Somewhere near ${location || zipcode}`}
+        </Type>
+      </View>
       <ScrollView horizontal bounces={false} style={[styles.weather, style]} {...passedProps}>
         {!!weatherDays && weatherDays.map(day => (
           <WeatherBlock key={day.time} {...day} />

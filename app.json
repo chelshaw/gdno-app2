@@ -3,11 +3,11 @@
   "displayName": "Gardenio",
   "expo": {
     "name": "Gardenio",
-    "description": "Let's grow together",
-    "slug": "gdno",
+    "description": "You don't have to grow it alone! Gardenio is a new kind of garden club, connecting Texans to the information, supplies, and people they need to start growing their own food. See what we're all about and join today at https://growgardenio.com",
+    "slug": "gardenio",
     "privacy": "unlisted",
-    "sdkVersion": "34.0.0",
-    "version": "0.5.1",
+    "sdkVersion": "35.0.0",
+    "version": "0.6.1",
     "entryPoint": "node_modules/expo/AppEntry.js",
     "icon": "./src/shared/assets/app-icon.png",
     "orientation": "portrait",
@@ -23,19 +23,29 @@
     ],
     "ios": {
       "bundleIdentifier": "com.growgardenio.gardenio",
-      "buildNumber": "0.5.1",
+      "buildNumber": "0.6.0",
       "supportsTablet": true
     },
     "android": {
       "package": "com.growgardenio.gardenio",
-      "versionCode": 18,
+      "versionCode": 19,
       "permissions": [],
       "playStoreUrl": "https://play.google.com/store/apps/details?id=com.growgardenio.gardenio",
-      "icon": "./src/shared/assets/android-icon.png",
+      "icon": "./src/shared/assets/android-icon.png"
     },
     "packagerOpts": {
       "config": "metro.config.js",
-      "sourceExts": ["js", "jsx", "svg"]
+      "sourceExts": [
+        "js",
+        "jsx",
+        "svg"
+      ]
+    },
+    "assetBundlePatterns": [
+      "src/shared/assets/*"
+    ],
+    "updates": {
+      "fallbackToCacheTimeout": 0
     }
   }
 }

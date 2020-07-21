@@ -64,3 +64,4 @@ src/shared/secrets-prod.js
 *.jks
 .expo-shared
 .expo
+google-services.json

@@ -140,7 +140,6 @@ android {
 }
 
 dependencies {
-    implementation project(':@react-native-community_async-storage')
     implementation project(':@sentry_react-native')
     implementation project(':react-native-svg')
     implementation project(':react-native-reanimated')

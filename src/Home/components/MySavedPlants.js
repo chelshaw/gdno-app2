@@ -8,11 +8,10 @@ import PropTypes from 'prop-types';
 
 import handleError from '../../shared/data/handleError';
 import {
-  Touchable, PageLoader, ErrorState, Type, Button
+  Touchable, PageLoader, ErrorState, Type, Button, PlantBlock
 } from '../../shared/components';
 import { space, centered } from '../../shared/constants';
-import PlantBlock from './PlantBlock';
-import { loadStoredPlants } from '../data';
+import { getUserPlants } from '../data';
 
 const styles = StyleSheet.create({
   container: {
@@ -44,6 +43,7 @@ const MySavedPlants = ({
   signout,
   reloadToggle,
   onAddPlant,
+  user,
   ...passedProps,
 }) => {
   const [loading, setLoading] = useState(false);
@@ -53,8 +53,9 @@ const MySavedPlants = ({
   // TODO: check against db for updates
 
   useEffect(() => {
+    const { uid } = user;
     setLoading(true);
-    loadStoredPlants()
+    getUserPlants(uid)
       .then((downloadedPlants) => {
         setPlants(downloadedPlants);
         setLoading(false);
@@ -65,13 +66,15 @@ const MySavedPlants = ({
         setError(true);
       });
     return () => { setError(false); setErrorCount(0); setLoading(false); };
-  }, [reloadToggle]);
+  }, [reloadToggle, user]);
 
   const loadPlants = async () => {
+    const { uid } = user;
+    if (!user) return;
     setLoading(true);
     setError(false);
     try {
-      const downloadedPlants = await loadStoredPlants();
+      const downloadedPlants = await getUserPlants(uid);
       setPlants(downloadedPlants);
       setLoading(false);
     } catch (e) {
@@ -145,6 +148,7 @@ MySavedPlants.propTypes = {
   signout: PropTypes.func,
   reloadToggle: PropTypes.number,
   onAddPlant: PropTypes.func,
+  user: PropTypes.object,
 };
 
 export default MySavedPlants;

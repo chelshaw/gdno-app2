@@ -67,7 +67,7 @@ const Welcome = () => (
             style={styles.logo}
           />
           <View style={styles.title}>
-            <FormInput align="center">You don&apos;t gotta grow it alone</FormInput>
+            <FormInput align="center">Join The Club</FormInput>
           </View>
         </Media.Body>
         <Media.Item style={styles.buttonBlock}>

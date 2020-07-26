@@ -27,10 +27,11 @@ export const storeUserPlant = async (plant) => {
   let storedPlant;
   try {
     storedPlant = await storePlant(plant.id, plant);
+    return fetchAndSavePlantSpecies(plant.speciesId, storedPlant);
   } catch (e) {
     handleError(e);
+    throw e;
   }
-  return fetchAndSavePlantSpecies(plant.speciesId, storedPlant);
 };
 
 export default null;

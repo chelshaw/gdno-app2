@@ -53,11 +53,14 @@ const MySavedPlants = ({
   // TODO: check against db for updates
 
   useEffect(() => {
-    const { uid } = user;
+    let uid;
+    if (user) {
+      uid = user.uid || '';
+    }
     setLoading(true);
     getUserPlants(uid)
-      .then((downloadedPlants) => {
-        setPlants(downloadedPlants);
+      .then((p) => {
+        setPlants(p);
         setLoading(false);
       })
       .catch((e) => {
@@ -65,6 +68,7 @@ const MySavedPlants = ({
         setLoading(false);
         setError(true);
       });
+
     return () => { setError(false); setErrorCount(0); setLoading(false); };
   }, [reloadToggle, user]);
 

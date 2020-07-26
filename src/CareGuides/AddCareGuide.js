@@ -6,7 +6,6 @@ import {
   Alert,
 } from 'react-native';
 
-import handleError from '../shared/data/handleError';
 import { useAuth } from '../shared/use-auth';
 import {
   PROPSHAPES, COLORS, space, centered
@@ -53,8 +52,7 @@ const AddCareGuideScreen = ({ navigation }) => {
         setSpeciesList(plants);
         setLoading(false);
       })
-      .catch((err) => {
-        handleError(err);
+      .catch(() => {
         setError(true);
         setLoading(false);
       });

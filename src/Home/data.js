@@ -107,6 +107,9 @@ const saveMyPlantsLocally = (userId, myPlants) => {
 
 const fetchAndDownloadUserPlants = async (userId) => {
   let userPlants;
+  if (!userId) {
+    throw new Error('No user ID provided to fetch plants');
+  }
   try {
     const fetchedPlants = await fetchUserPlants(userId);
     userPlants = fetchedPlants.filter(plant => !plant.deletedOn);
@@ -120,13 +123,14 @@ const fetchAndDownloadUserPlants = async (userId) => {
 
 export const getUserPlants = async (userId) => {
   let storedPlants;
+  let downloadedPlants;
   try {
-    storedPlants = await loadStoredPlants();
-    if (!userId || storedPlants.length !== 0) return storedPlants;
-    return fetchAndDownloadUserPlants(userId);
+    downloadedPlants = fetchAndDownloadUserPlants(userId);
+    return downloadedPlants;
   } catch (e) {
     handleError(e);
-    throw new Error('We were unable to get info about your garden :( please try again later.');
+    storedPlants = await loadStoredPlants();
+    return storedPlants;
   }
 };
 

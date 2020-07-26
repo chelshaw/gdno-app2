@@ -124,6 +124,9 @@ const fetchAndDownloadUserPlants = async (userId) => {
 export const getUserPlants = async (userId) => {
   let storedPlants;
   let downloadedPlants;
+  if (!userId) {
+    return loadStoredPlants();
+  }
   try {
     downloadedPlants = fetchAndDownloadUserPlants(userId);
     return downloadedPlants;

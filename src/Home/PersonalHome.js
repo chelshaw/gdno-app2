@@ -160,7 +160,7 @@ const PersonalHome = ({ navigation }) => {
                 </Touchable>
               </Media.Item>
             </Media>
-            {auth && auth.user ? (
+            {auth ? (
               <MySavedPlants
                 onAddPlant={handleAddPlantPress}
                 reloadToggle={reloadPlantsToggle}
@@ -180,7 +180,7 @@ const PersonalHome = ({ navigation }) => {
                 like? What can we do better?
               </Type>
             </View>
-            <Button onPress={handleFeedbackPress}>Tell us your thoughts</Button>
+            <Button color="cyan" onPress={handleFeedbackPress}>Tell us your thoughts</Button>
           </View>
         </View>
       </ScrollView>

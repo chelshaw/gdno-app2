@@ -1,13 +1,10 @@
-import React from 'react';
 import {
-  StyleSheet, Image, Text, View, Button
+  StyleSheet, Image, Text, View, Button, SafeAreaView
 } from 'react-native';
-import Onboarding from 'react-native-onboarding-swiper';
-import logo from '../shared/assets/icon-transparent.png';
+import React from 'react';
 import {PROPSHAPES} from '../shared/constants';
-import {
-  Body, Header, Media, Touchable, StyledInput
-} from '../shared/components';
+import logo from '../shared/assets/icon-transparent.png';
+import Onboarding from 'react-native-onboarding-swiper';
 
 const styles = StyleSheet.create({
   logo: {
@@ -15,21 +12,18 @@ const styles = StyleSheet.create({
     height: 100,
   },
   backgroundImage: {
+    resizeMode: 'cover', 
+  },
+  logoText: {
+    fontSize: 40,
     flex: 1,
-    resizeMode: 'cover', // or 'stretch'
-  },
-  logoTitle: {
-    fontSize: 40
-  },
+    position: 'absolute',
+  }, 
 })
 
-const CircleDot = ({ isLight, selected }) => {
+const CircleDot = ({ selected }) => {
   let backgroundColor;
-  if (isLight) {
-    backgroundColor = selected ? '#00B9AC' : 'rgba(0, 0, 0, 0.4)';
-  } else {
-    backgroundColor = selected ? '#00B9AC' : 'rgba(0, 0, 0, 0.4)';
-  }
+  backgroundColor = selected ? '#00B9AC' : 'rgba(0, 0, 0, 0.3)';
   return (
     <View
       style={{
@@ -43,80 +37,66 @@ const CircleDot = ({ isLight, selected }) => {
   );
 };
 
-const Skip = ({skipLabel, ...props }) => (
-  <Button
-    title={'LOGIN'}
-    containerViewStyle={{
-      marginVertical: 30,
-    }}
-    color={'rgb(0, 185, 172)'}
-    {...props}
-  >
-    {skipLabel}
-  </Button>
-);
+const Skip = ({...props}) => {
+  return (
+    <Button
+      title={'    LOGIN'} 
+      color={'rgb(0, 185, 172)'}
+      {...props}
+    >
+    </Button>
+  );
+};
 
 const Next = ({ ...props }) => (
   <Button
-    title={'NEXT'}
-    containerViewStyle={{
-      marginVertical: 40,
-    }}
+    title={'NEXT     '}
     color={'rgb(0, 185, 172)'}
     {...props}
   />
 );
 
 const Onboard = ({ navigation }) => (
-   <Onboarding
-      DotComponent={CircleDot}
+  <>
+    <Onboarding
       bottomBarColor = {'#fff'}
       bottomBarHeight = {80}
-      controlStatusBar = {false}
+      DotComponent={CircleDot}
       SkipButtonComponent={Skip}
       NextButtonComponent={Next}
-      containerStyles={
-        {
-          flex: 1,
-          flexDirection: "column"
-        }
+      onSkip={() => 
+        navigation.navigate('Welcome')
+      }
+      onDone={() =>  
+        navigation.navigate('Welcome')
       }
       imageContainerStyles={
         { flex: 1,
-          justifyContent: "center"
         }
-      }
-
-      onDone={() => 
-        navigation.navigate('Welcome')
       }
       pages={[
         {
-          backgroundColor: '#fff',
-          image: <Image source={require('../shared/assets/onboard0.png')} style={styles.backgroundImage} />,
-          title:<Text style={styles.logoTitle}>gardenio</Text>,
+          backgroundColor: 'white',
+          image: <Image style={styles.backgroundImage} source={require('../shared/assets/onboardGradient.png')}/>,
+          title: <Text style={styles.logoText}>gardenio</Text>,
           subtitle:'A new kind of garden club membership for new food growers',
         },
         {
-          backgroundColor: '#fff',
-          image: <Image source={require('../shared/assets/onboard1.png')} style={styles.backgroundImage} />,
-          title: 'Onboarding',
-          subtitle: '',
+          backgroundColor: 'white',
+          image: <Image style={styles.backgroundImage} source={require('../shared/assets/onboardGradient.png')}/>,
+          title: <Text style={styles.logoText}>gardenio</Text>,
+          subtitle:'A new kind of garden club membership for new food growers',
         },
         {
-          backgroundColor: '#fff',
-          image: <Image source={require('../shared/assets/onboard2.png')} style={styles.backgroundImage}/>,
-          title: 'Onboarding',
-          subtitle: '',
-        },
-        {
-          backgroundColor: '#999',
-          image: <Image source={require('../shared/assets/onboard3.png')} style={styles.backgroundImage}/>,
-          title: 'Onboarding',
-          subtitle: '',
+          backgroundColor: 'white',
+          image: <Image style={styles.backgroundImage} source={require('../shared/assets/onboardGradient.png')}/>,
+          title: <Text style={styles.logoText}>gardenio</Text>,
+          subtitle:'A new kind of garden club membership for new food growers',
         },
       ]}
     />
+    <SafeAreaView style={{opacity: 0}} />
+  </>
 );
 Onboard.propTypes = {
   navigation: PROPSHAPES.navigation,

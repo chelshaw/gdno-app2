@@ -60,6 +60,7 @@ buck-out/
 src/shared/secrets.js
 src/shared/secrets-dev.js
 src/shared/secrets-prod.js
+src/shared/secrets/
 
 *.jks
 .expo-shared

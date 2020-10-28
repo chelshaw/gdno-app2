@@ -20,10 +20,14 @@ Windows:
 
 1. Pull down the repo
 
-2. `yarn install` inside the root directory
+2. Add secrets.js file into the `src/shared` directory. Ask another member of the team to share this with you if they haven't already done so.
+
+3. `yarn install` inside the root directory
     Note: Make sure your node version is set to 10.15.3
 
-3. `cd ios; pod install` to install the ios podfiles
+4. Link the Sentry React Native Package by running `react-native link @sentry/react-native`. During this process you will need to login to Sentry, so have another team member send you an invite. Once you authenticate you should select the Gardenio/gardenio project.
+
+5. `cd ios; pod install` to install the ios podfiles
 
 ## Simulating iOS
 

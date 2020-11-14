@@ -16,7 +16,13 @@
     "publish-staging": "expo publish --release-channel staging",
     "publish-prod": "expo publish",
     "clean": "rm -rf node_modules; rm -rf ios/Pods",
-    "make-ios": "turtle build:ios --team-id MNM2Y2U7P6 --dist-p12-path ~/Documents/ios_app_signing/iphone-dist-exp2021.p12 --provisioning-profile-path ~/Documents/ios_app_signing/gardenioMNM2Y2U7P6.mobileprovision"
+    "make-ios": "turtle build:ios --team-id MNM2Y2U7P6 --dist-p12-path ~/Documents/ios_app_signing/iphone-dist-exp2021.p12 --provisioning-profile-path ~/Documents/ios_app_signing/gardenioMNM2Y2U7P6.mobileprovision",
+    "nuke": "yarn run nuke:native && yarn run nuke:node",
+    "nuke:android": "rm -rf android/build",
+    "nuke:ios": "rm -rf ios/build",
+    "nuke:native": "yarn run nuke:ios && yarn run nuke:android",
+    "nuke:node": "rm -rf node_modules",
+    "nuke:all": "yarn run nuke && git reset HEAD --hard && yarn install"
   },
   "dependencies": {
     "@babel/plugin-proposal-decorators": "^7.10.1",

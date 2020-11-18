@@ -9,15 +9,15 @@
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* gdnoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* gdnoTests.m */; };
 		0CBA24D83C804769A1F8E1FA /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D452B8C8D9848659BA50C43 /* libz.tbd */; };
-		116FFFE1EF8921B7C025FF5E /* libPods-gdno.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51F40A576EB322EF1CE74110 /* libPods-gdno.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		41959EF826054F50C6D22076 /* libPods-gdnoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0527DCF6FC7091EC40E5C53A /* libPods-gdnoTests.a */; };
 		5319C0A19A654668A6965D1C /* CircularAirPro-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3B232DAB57C642C3882B3498 /* CircularAirPro-Bold.otf */; };
 		8147094212C44C22B8F64BD7 /* CircularAirPro-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5DDFD992FDB44EE5907BC16C /* CircularAirPro-Light.otf */; };
+		AA214BE82E2B642E823102AA /* libPods-gdno.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9265CCE87647CC1AA43FD6C /* libPods-gdno.a */; };
 		BB2E3E2D0AA541DA9B05F3F9 /* CircularAirPro-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5688369D8AF64F5ABF03FED6 /* CircularAirPro-Black.otf */; };
+		C428F69098BDE577FDFE3737 /* libPods-gdnoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F82F4673196B2976CC0D5036 /* libPods-gdnoTests.a */; };
 		D80758946AA6444EB17A096C /* CircularAirPro-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7C08823F0CA54A9C9A2C781C /* CircularAirPro-LightItalic.otf */; };
 		EDCBCEF2163A4AD8982EC5FE /* CircularAirPro-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 827E6E0EE21A4411AEB0BBB0 /* CircularAirPro-Medium.otf */; };
 /* End PBXBuildFile section */
@@ -37,8 +37,6 @@
 		00E356EE1AD99517003FC87E /* gdnoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gdnoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* gdnoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = gdnoTests.m; sourceTree = "<group>"; };
-		0527DCF6FC7091EC40E5C53A /* libPods-gdnoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gdnoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0571229B0E26CAFFAD8F7264 /* Pods-gdnoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gdnoTests.release.xcconfig"; path = "Target Support Files/Pods-gdnoTests/Pods-gdnoTests.release.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* gdno.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gdno.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = gdno/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = gdno/AppDelegate.m; sourceTree = "<group>"; };
@@ -48,17 +46,19 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = gdno/main.m; sourceTree = "<group>"; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B232DAB57C642C3882B3498 /* CircularAirPro-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "CircularAirPro-Bold.otf"; path = "../src/shared/fonts/CircularAirPro-Bold.otf"; sourceTree = "<group>"; };
-		51F40A576EB322EF1CE74110 /* libPods-gdno.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gdno.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5688369D8AF64F5ABF03FED6 /* CircularAirPro-Black.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "CircularAirPro-Black.otf"; path = "../src/shared/fonts/CircularAirPro-Black.otf"; sourceTree = "<group>"; };
 		5DDFD992FDB44EE5907BC16C /* CircularAirPro-Light.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "CircularAirPro-Light.otf"; path = "../src/shared/fonts/CircularAirPro-Light.otf"; sourceTree = "<group>"; };
 		7C08823F0CA54A9C9A2C781C /* CircularAirPro-LightItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "CircularAirPro-LightItalic.otf"; path = "../src/shared/fonts/CircularAirPro-LightItalic.otf"; sourceTree = "<group>"; };
 		827E6E0EE21A4411AEB0BBB0 /* CircularAirPro-Medium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "CircularAirPro-Medium.otf"; path = "../src/shared/fonts/CircularAirPro-Medium.otf"; sourceTree = "<group>"; };
-		836B2F55A976BA0694EB2672 /* Pods-gdno.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gdno.debug.xcconfig"; path = "Target Support Files/Pods-gdno/Pods-gdno.debug.xcconfig"; sourceTree = "<group>"; };
 		9D452B8C8D9848659BA50C43 /* libz.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		D8475DE1F81C7331C0258290 /* Pods-gdnoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gdnoTests.debug.xcconfig"; path = "Target Support Files/Pods-gdnoTests/Pods-gdnoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		9EA7BBF7028995EA21370579 /* Pods-gdno.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gdno.debug.xcconfig"; path = "Target Support Files/Pods-gdno/Pods-gdno.debug.xcconfig"; sourceTree = "<group>"; };
+		D20B31E3E48AFF8F0BF7B44A /* Pods-gdnoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gdnoTests.debug.xcconfig"; path = "Target Support Files/Pods-gdnoTests/Pods-gdnoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D281DB74DC27B0DB24CDF2D4 /* Pods-gdnoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gdnoTests.release.xcconfig"; path = "Target Support Files/Pods-gdnoTests/Pods-gdnoTests.release.xcconfig"; sourceTree = "<group>"; };
+		D9265CCE87647CC1AA43FD6C /* libPods-gdno.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gdno.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D946116857D993E9B4299876 /* Pods-gdno.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gdno.release.xcconfig"; path = "Target Support Files/Pods-gdno/Pods-gdno.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		F168A24B3070250C20964C5E /* Pods-gdno.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gdno.release.xcconfig"; path = "Target Support Files/Pods-gdno/Pods-gdno.release.xcconfig"; sourceTree = "<group>"; };
+		F82F4673196B2976CC0D5036 /* libPods-gdnoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gdnoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,7 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41959EF826054F50C6D22076 /* libPods-gdnoTests.a in Frameworks */,
+				C428F69098BDE577FDFE3737 /* libPods-gdnoTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,7 +75,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0CBA24D83C804769A1F8E1FA /* libz.tbd in Frameworks */,
-				116FFFE1EF8921B7C025FF5E /* libPods-gdno.a in Frameworks */,
+				AA214BE82E2B642E823102AA /* libPods-gdno.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +97,18 @@
 				00E356F11AD99517003FC87E /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		02B713B3A785AE1E7AA258D7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9EA7BBF7028995EA21370579 /* Pods-gdno.debug.xcconfig */,
+				D946116857D993E9B4299876 /* Pods-gdno.release.xcconfig */,
+				D20B31E3E48AFF8F0BF7B44A /* Pods-gdnoTests.debug.xcconfig */,
+				D281DB74DC27B0DB24CDF2D4 /* Pods-gdnoTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		0A771DAFFAF949C9B61E32E6 /* Resources */ = {
@@ -133,22 +145,10 @@
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
 				9D452B8C8D9848659BA50C43 /* libz.tbd */,
-				51F40A576EB322EF1CE74110 /* libPods-gdno.a */,
-				0527DCF6FC7091EC40E5C53A /* libPods-gdnoTests.a */,
+				D9265CCE87647CC1AA43FD6C /* libPods-gdno.a */,
+				F82F4673196B2976CC0D5036 /* libPods-gdnoTests.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		4B897AE1515670B54AD80F08 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				836B2F55A976BA0694EB2672 /* Pods-gdno.debug.xcconfig */,
-				F168A24B3070250C20964C5E /* Pods-gdno.release.xcconfig */,
-				D8475DE1F81C7331C0258290 /* Pods-gdnoTests.debug.xcconfig */,
-				0571229B0E26CAFFAD8F7264 /* Pods-gdnoTests.release.xcconfig */,
-			);
-			name = Pods;
-			path = Pods;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -167,7 +167,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				0A771DAFFAF949C9B61E32E6 /* Resources */,
-				4B897AE1515670B54AD80F08 /* Pods */,
+				02B713B3A785AE1E7AA258D7 /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -190,7 +190,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "gdnoTests" */;
 			buildPhases = (
-				E983947B5D46641DCAE85DCE /* [CP] Check Pods Manifest.lock */,
+				7EC695772D3F4534DC513053 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
@@ -209,13 +209,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "gdno" */;
 			buildPhases = (
-				F7FB9BF96ADC24FE687F74E8 /* [CP] Check Pods Manifest.lock */,
+				13767DF96BFCDFD0FC7F8B79 /* [CP] Check Pods Manifest.lock */,
 				FD4C38642228810C00325AF5 /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				87953E0F6A531D83B09168B4 /* [CP] Copy Pods Resources */,
+				005FB2FC1058F245976C15F1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -285,21 +285,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Bundle React Native code and images";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
-		};
-		87953E0F6A531D83B09168B4 /* [CP] Copy Pods Resources */ = {
+		005FB2FC1058F245976C15F1 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -317,29 +303,21 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-gdno/Pods-gdno-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E983947B5D46641DCAE85DCE /* [CP] Check Pods Manifest.lock */ = {
+		00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
+			name = "Bundle React Native code and images";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-gdnoTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
-		F7FB9BF96ADC24FE687F74E8 /* [CP] Check Pods Manifest.lock */ = {
+		13767DF96BFCDFD0FC7F8B79 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -355,6 +333,28 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-gdno-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7EC695772D3F4534DC513053 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-gdnoTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -425,7 +425,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D8475DE1F81C7331C0258290 /* Pods-gdnoTests.debug.xcconfig */;
+			baseConfigurationReference = D20B31E3E48AFF8F0BF7B44A /* Pods-gdnoTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -448,7 +448,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0571229B0E26CAFFAD8F7264 /* Pods-gdnoTests.release.xcconfig */;
+			baseConfigurationReference = D281DB74DC27B0DB24CDF2D4 /* Pods-gdnoTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -468,7 +468,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 836B2F55A976BA0694EB2672 /* Pods-gdno.debug.xcconfig */;
+			baseConfigurationReference = 9EA7BBF7028995EA21370579 /* Pods-gdno.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
@@ -488,7 +488,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F168A24B3070250C20964C5E /* Pods-gdno.release.xcconfig */;
+			baseConfigurationReference = D946116857D993E9B4299876 /* Pods-gdno.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;

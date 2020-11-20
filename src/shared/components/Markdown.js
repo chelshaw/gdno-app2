@@ -32,7 +32,7 @@ export const markdownStyles = {
 const MyMarkdown = ({
   styles,
   children,
-  ...rest,
+  ...rest
 }) => (
   <Markdown styles={{ ...markdownStyles, ...styles }} {...rest}>
     {children}

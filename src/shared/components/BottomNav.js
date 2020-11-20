@@ -44,7 +44,7 @@ const ss = StyleSheet.create({
 });
 
 const BottomNav = ({
-  style = {}, current, ...props,
+  style = {}, current, ...props
 }) => {
   const logo = current === 'home' ? gdnoIcon : gdnoInactive;
   const openShop = () => {

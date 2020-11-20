@@ -48,7 +48,7 @@ const WeatherBlock = ({
   temperatureMax,
   temperatureMin,
   precipProbability,
-  ...passedProps,
+  ...passedProps
 }) => {
   const weatherIcon = useMemo(() => getIcon(icon), [icon]);
 

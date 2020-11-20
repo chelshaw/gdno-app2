@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
 const RelatableWeather = ({
   style,
   dailyData = [],
-  ...passedProps,
+  ...passedProps
 }) => {
   const content = useMemo(() => {
     const concerns = {

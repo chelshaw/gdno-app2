@@ -13,7 +13,7 @@ const Touchable = ({
   disabled = false,
   children,
   navigation,
-  ...rest,
+  ...rest
 }) => {
   let handlePress = onPress;
   if (typeof onPress === 'string') {

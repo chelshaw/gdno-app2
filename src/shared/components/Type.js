@@ -15,7 +15,7 @@ const Type = ({
   align = 'left',
   lineHeight = 1.5,
   letterSpacing = 0,
-  ...rest,
+  ...rest
 }) => {
   if (!children) return null;
   // const fontSelect = italic ? `${weight}Italic` : weight;

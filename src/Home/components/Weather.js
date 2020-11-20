@@ -30,7 +30,7 @@ const Weather = ({
   style,
   zipcode,
   loadingZipcode,
-  ...passedProps,
+  ...passedProps
 }) => {
   const [loading, setLoading] = useState(false);
   const [weatherDays, setWeatherDays] = useState(null);

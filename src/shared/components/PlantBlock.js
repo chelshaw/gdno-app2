@@ -27,7 +27,7 @@ const PlantBlock = ({
   nickname,
   species,
   imageUrl,
-  ...passedProps,
+  ...passedProps
 }) => (
   <View style={[styles.plantBlock, style]} {...passedProps}>
     <View style={styles.thumbnail}>

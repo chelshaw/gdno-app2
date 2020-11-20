@@ -44,7 +44,7 @@ const MySavedPlants = ({
   reloadToggle,
   onAddPlant,
   user,
-  ...passedProps,
+  ...passedProps
 }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);

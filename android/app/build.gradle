@@ -99,11 +99,11 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.gdno"
+        applicationId 'com.growgardenio.gardenio'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 19
+        versionName "0.6.2"
     }
     splits {
         abi {

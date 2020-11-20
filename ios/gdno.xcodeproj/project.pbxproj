@@ -20,6 +20,7 @@
 		C428F69098BDE577FDFE3737 /* libPods-gdnoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F82F4673196B2976CC0D5036 /* libPods-gdnoTests.a */; };
 		D80758946AA6444EB17A096C /* CircularAirPro-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7C08823F0CA54A9C9A2C781C /* CircularAirPro-LightItalic.otf */; };
 		EDCBCEF2163A4AD8982EC5FE /* CircularAirPro-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 827E6E0EE21A4411AEB0BBB0 /* CircularAirPro-Medium.otf */; };
+		D0B99B48E8504C8197E2B2BD /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D9E806BCB07410EA5C6C04C /* SplashScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F82F4673196B2976CC0D5036 /* libPods-gdnoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gdnoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D9E806BCB07410EA5C6C04C /* SplashScreen.storyboard */ = {isa = PBXFileReference; name = "SplashScreen.storyboard"; path = "gdno/SplashScreen.storyboard"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = file.storyboard; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +136,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				3D9E806BCB07410EA5C6C04C /* SplashScreen.storyboard */,
 			);
 			name = gdno;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 				8147094212C44C22B8F64BD7 /* CircularAirPro-Light.otf in Resources */,
 				D80758946AA6444EB17A096C /* CircularAirPro-LightItalic.otf in Resources */,
 				EDCBCEF2163A4AD8982EC5FE /* CircularAirPro-Medium.otf in Resources */,
+				D0B99B48E8504C8197E2B2BD /* SplashScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,6 +447,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/gdno.app/gdno";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -463,6 +468,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/gdno.app/gdno";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -480,9 +486,11 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = gdno;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.growgardenio.gardenio";
+				PRODUCT_NAME = gardenio;
 				VERSIONING_SYSTEM = "apple-generic";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				CODE_SIGN_ENTITLEMENTS = gdno/"Hello World".entitlements;
 			};
 			name = Debug;
 		};
@@ -499,9 +507,11 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = gdno;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.growgardenio.gardenio";
+				PRODUCT_NAME = gardenio;
 				VERSIONING_SYSTEM = "apple-generic";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				CODE_SIGN_ENTITLEMENTS = gdno/"Hello World".entitlements;
 			};
 			name = Release;
 		};
@@ -555,6 +565,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				CODE_SIGN_ENTITLEMENTS = gdno/"Hello World".entitlements;
 			};
 			name = Debug;
 		};
@@ -601,6 +612,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
+				CODE_SIGN_ENTITLEMENTS = gdno/"Hello World".entitlements;
 			};
 			name = Release;
 		};
